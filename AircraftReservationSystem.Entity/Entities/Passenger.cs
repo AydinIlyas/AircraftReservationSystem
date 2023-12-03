@@ -9,16 +9,20 @@ namespace AircraftReservationSystem.Entity.Entities
 {
     public class Passenger
     {
+        public Passenger()
+        {
+        }
 
-        public Passenger(int id, string firstname, string lastname, string passportNumber, string email, string phoneNumber, DateTime birthDate)
+        public Passenger(int id, string firstname, string lastname, string passportNumber, string email, string phoneNumber, DateTime birthDate, ICollection<SoldTicket> soldTicket)
         {
             Id = id;
-            this.firstname = firstname;
-            this.lastname = lastname;
-            this.passportNumber = passportNumber;
-            this.email = email;
-            this.phoneNumber = phoneNumber;
-            this.birthDate = birthDate;
+            Firstname = firstname;
+            Lastname = lastname;
+            PassportNumber = passportNumber;
+            Email = email;
+            PhoneNumber = phoneNumber;
+            BirthDate = birthDate;
+            SoldTickets = soldTicket;
         }
 
         [Key]
@@ -26,26 +30,26 @@ namespace AircraftReservationSystem.Entity.Entities
 
         [Required]
         [StringLength(50, MinimumLength = 2,ErrorMessage = "Your name must be between 2-50 characters!")]
-        public string firstname {  get; set; }
+        public string Firstname {  get; set; }
         
         [Required]
-        public string lastname { get; set; }
+        public string Lastname { get; set; }
         
         [Required]
-        public string passportNumber {  get; set; }
+        public string PassportNumber {  get; set; }
         
         [Required]
         [EmailAddress(ErrorMessage ="Enter a valid email adress!")]
-        public string email {  get; set; }
+        public string Email {  get; set; }
         
         [Required]
         [Phone(ErrorMessage = "Enter a valid phone number!")]
-        public string phoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
         
         [Required]
-        public DateTime birthDate { get; set; }
+        public DateTime BirthDate { get; set; }
 
-        public ICollection<SoldTicket> soldTickets { get; set; }
+        public ICollection<SoldTicket> SoldTickets { get; set; }
 
     }
 }

@@ -10,32 +10,37 @@ namespace AircraftReservationSystem.Entity.Entities
 {
     public class Airport
     {
-        public Airport(int ıd, string name, string airportCode, int districtId, District district, ICollection<Flight> flights)
+        public Airport()
         {
-            Id = ıd;
-            this.name = name;
-            this.airportCode = airportCode;
-            this.districtId = districtId;
-            this.district = district;
-            this.flights = flights;
+        }
+
+        public Airport(int id, string name, string airportCode, ICollection<Flight> departures, ICollection<Flight> arrivals, District district, int districtId)
+        {
+            Id = id;
+            Name = name;
+            AirportCode = airportCode;
+            Departures = departures;
+            Arrivals = arrivals;
+            District = district;
+            DistrictId = districtId;
         }
 
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public string name { get; set; }
+        public string Name { get; set; }
 
         [Required]
-        public string airportCode { get; set; }
+        public string AirportCode { get; set; }
+        [InverseProperty("DepartureAirport")]
+        public ICollection<Flight> Departures { get; set; }
+        [InverseProperty("ArrivalAirport")]
 
-        [ForeignKey("district")]
-        public int districtId { get; set; }
+        public ICollection<Flight> Arrivals { get; set; }
 
-        public District district { get; set; }
-
-        public ICollection<Flight> flights { get; set; }
-
+        public District District { get; set; }
+        public int DistrictId { get; set; } 
 
 
 

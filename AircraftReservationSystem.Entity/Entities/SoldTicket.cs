@@ -10,27 +10,39 @@ namespace AircraftReservationSystem.Entity.Entities
 {
     public class SoldTicket
     {
+        public SoldTicket()
+        {
+        }
+
+        public SoldTicket(int id, string seatNumber, float totalPrice, PaymentInformation? paymentInformation, Passenger passenger, int passengerId, FlightClass flightClass, int flightClassId, FlightTicket? flightTicket)
+        {
+            Id = id;
+            SeatNumber = seatNumber;
+            TotalPrice = totalPrice;
+            PaymentInformation = paymentInformation;
+            Passenger = passenger;
+            PassengerId = passengerId;
+            FlightClass = flightClass;
+            FlightClassId = flightClassId;
+            FlightTicket = flightTicket;
+        }
 
         [Key]
         public int Id { get; set; }
         
         [Required]
-        public string seatNumber { get; set; }
+        public string SeatNumber { get; set; }
         
         [Required]
-        public float totalPrice { get; set; }
+        public float TotalPrice { get; set; }
 
-        [ForeignKey("passenger")]
-        public int passengerId { get; set; }
-
-        [ForeignKey("flightTicket")]
-        public int flightTicketId { get; set; }
-
-        public Passenger passenger { get; set; }
-
-        public FlightTicket flightTicket { get; set; }
-
-        public PaymentInformation paymentInformation { get; set; }
-    
+        public PaymentInformation? PaymentInformation { get; set; }
+        [ForeignKey("PassengerId")]
+        public Passenger Passenger { get; set; }
+        public int PassengerId { get; set; }
+        [ForeignKey("FlightClassId")]
+        public FlightClass FlightClass { get; set; }
+        public int FlightClassId { get; set; }
+        public FlightTicket? FlightTicket { get; set; }
     }
 }

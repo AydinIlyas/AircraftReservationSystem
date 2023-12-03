@@ -10,31 +10,35 @@ namespace AircraftReservationSystem.Entity.Entities
 {
     public class PaymentInformation
     {
-        public PaymentInformation(int ıd, string cardNumber, DateTime date, int paymentTypeId, PaymentType paymentType, SoldTicket soldTicket)
+        public PaymentInformation()
         {
-            Id = ıd;
-            this.cardNumber = cardNumber;
+        }
+
+        public PaymentInformation(int id, string cardNumber, DateTime date, PaymentType paymentType, int paymentTypeId, SoldTicket soldTicket, int soldTicketId)
+        {
+            Id = id;
+            CardNumber = cardNumber;
             Date = date;
-            this.paymentTypeId = paymentTypeId;
-            this.paymentType = paymentType;
+            PaymentType = paymentType;
+            PaymentTypeId = paymentTypeId;
             SoldTicket = soldTicket;
+            SoldTicketId = soldTicketId;
         }
 
         [Key]
         public int Id{ get; set; }
 
         [Required] 
-        public string cardNumber { get; set; }
+        public string CardNumber { get; set; }
 
         [Required]
         public DateTime Date { get; set; }
 
-        [ForeignKey("paymentType")]
-        public int paymentTypeId { get; set; }
-
-        public PaymentType paymentType { get; set; }
+        public PaymentType PaymentType { get; set; }
+        public int PaymentTypeId { get; set; }
 
         public SoldTicket SoldTicket { get; set; }
+        public int SoldTicketId { get; set; }
         
     }
 }

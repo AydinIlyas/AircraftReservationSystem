@@ -10,44 +10,62 @@ namespace AircraftReservationSystem.Entity.Entities
 {
     public class Flight
     {
+        public Flight()
+        {
+        }
+
+        public Flight(int id, string fligthNumber, DateTime departureDate, DateTime arrivalDate, int duration, float price, float businessPrice, bool isDisabledFlight, Aircraft aircraft, int airCraftId, Airport departureAirport, int departureAirportId, Airport arrivalAirport, int arrivalAirportId, ICollection<FlightTicket> flightTickets)
+        {
+            Id = id;
+            FligthNumber = fligthNumber;
+            DepartureDate = departureDate;
+            ArrivalDate = arrivalDate;
+            Duration = duration;
+            Price = price;
+            BusinessPrice = businessPrice;
+            IsDisabledFlight = isDisabledFlight;
+            Aircraft = aircraft;
+            AirCraftId = airCraftId;
+            DepartureAirport = departureAirport;
+            DepartureAirportId = departureAirportId;
+            ArrivalAirport = arrivalAirport;
+            ArrivalAirportId = arrivalAirportId;
+            FlightTickets = flightTickets;
+        }
 
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public string fligthNumber { get; set; }
+        public string FligthNumber { get; set; }
 
         [Required]
-        public DateTime departureDate { get; set; }
+        public DateTime DepartureDate { get; set; }
 
         [Required]
-        public DateTime arrivalDate { get; set; }
+        public DateTime ArrivalDate { get; set; }
 
         [Required]
-        public int duration { get; set; }
+        public int Duration { get; set; }
 
         [Required]
-        public float price { get; set; }
+        public float Price { get; set; }
 
-        public float businessPrice { get; set; }
+        public float BusinessPrice { get; set; }
 
         [Required]
-        public bool isDisabledFlight { get; set; }
+        public bool IsDisabledFlight { get; set; }
 
-        [ForeignKey("departureAirport")]
-        public int departureAirportId { get; set; }
+        public Aircraft Aircraft { get; set; }
+        public int AirCraftId {  get; set; }
+        [ForeignKey("DepartureAirportId")]
+        public Airport DepartureAirport { get; set; }
+        public int DepartureAirportId { get; set; }
+        [ForeignKey("ArrivalAirportId")]
+        public Airport ArrivalAirport { get; set; }
+        public int ArrivalAirportId { get; set;}
 
-        [ForeignKey("arrivalAirport")]
-        public int arrivalAirportId { get; set; }
-
-        //[ForeignKey("")]
-        //public int aircraftId { get; set; }
-
-        public ICollection<FlightTicket> flightTickets { get; set; }
-
-        public Airport departureAirport { get; set; }
-
-        public Airport arrivalAirport { get; set; }
+        public ICollection<FlightTicket> FlightTickets { get; set; }
 
     }
 }

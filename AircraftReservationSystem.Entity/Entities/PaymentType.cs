@@ -9,21 +9,24 @@ namespace AircraftReservationSystem.Entity.Entities
 {
     public class PaymentType
     {
-        public PaymentType(int ıd, string paymentType, ICollection<PaymentInformation> paymentInformations)
+        public PaymentType()
         {
-            Id = ıd;
-            this.paymentType = paymentType;
-            this.paymentInformations = paymentInformations;
+        }
+
+        public PaymentType(int id, string paymentTypeName, ICollection<PaymentInformation> paymentInformation)
+        {
+            Id = id;
+            PaymentTypeName = paymentTypeName;
+            PaymentInformations = paymentInformation;
         }
 
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public string paymentType{ get; set; }
+        public string PaymentTypeName{ get; set; }
 
-        public ICollection<PaymentInformation> paymentInformations { get; set; }
-
+        public ICollection<PaymentInformation>PaymentInformations { get; set; }
 
     }
 }

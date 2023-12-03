@@ -10,31 +10,32 @@ namespace AircraftReservationSystem.Entity.Entities
 {
     public class City
     {
-        public City(int ıd, string name, string code, int countryId, Country country, ICollection<District> districts)
+        public City()
         {
-            Id = ıd;
-            this.name = name;
-            this.code = code;
-            this.countryId = countryId;
-            this.country = country;
-            this.districts = districts;
+        }
+
+        public City(int id, string name, string code, Country country, int countryId, ICollection<District> districts)
+        {
+            Id = id;
+            Name = name;
+            Code = code;
+            Country = country;
+            CountryId = countryId;
+            Districts = districts;
         }
 
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public string name { get; set; }
+        public string Name { get; set; }
 
         [Required]
-        public string code { get; set; }
+        public string Code { get; set; }
+        public Country Country { get; set; }
+        public int CountryId { get; set; }  
 
-        [ForeignKey("country")]
-        public int countryId { get; set; }
-
-        public Country country { get; set; }
-
-        public ICollection<District> districts { get; set; }
+        public ICollection<District> Districts { get; set; }
 
     }
 }
