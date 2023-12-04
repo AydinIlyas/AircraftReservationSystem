@@ -14,13 +14,11 @@ namespace AircraftReservationSystem.Entity.Entities
         {
         }
 
-        public Passenger( string firstname, string lastname, string passportNumber, string email, string phoneNumber, DateTime birthDate, ICollection<SoldTicket> soldTicket)
+        public Passenger( string firstname, string lastname, string passportNumber, DateTime birthDate, ICollection<SoldTicket> soldTicket)
         {
             Firstname = firstname;
             Lastname = lastname;
             PassportNumber = passportNumber;
-            Email = email;
-            PhoneNumber = phoneNumber;
             BirthDate = birthDate;
             SoldTickets = soldTicket;
         }
@@ -34,14 +32,6 @@ namespace AircraftReservationSystem.Entity.Entities
         
         [Required]
         public string PassportNumber {  get; set; }
-        
-        [Required]
-        [EmailAddress(ErrorMessage ="Enter a valid email adress!")]
-        public string Email {  get; set; }
-        
-        [Required]
-        [Phone(ErrorMessage = "Enter a valid phone number!")]
-        public string PhoneNumber { get; set; }
         
         [Required]
         public DateTime BirthDate { get; set; }
