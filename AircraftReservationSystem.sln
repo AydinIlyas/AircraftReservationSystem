@@ -5,15 +5,18 @@ VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AircraftReservationSystem", "AircraftReservationSystem\AircraftReservationSystem.csproj", "{B97EED9B-8362-4880-BD48-B7763A9559D9}"
 	ProjectSection(ProjectDependencies) = postProject
+		{327110D6-E0E5-4F57-98F7-44D0DE3FB661} = {327110D6-E0E5-4F57-98F7-44D0DE3FB661}
 		{F062B80C-1A62-4F44-8334-056FB47185DE} = {F062B80C-1A62-4F44-8334-056FB47185DE}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AircraftReservationSystem.Data", "AircraftReservationSystem.Data\AircraftReservationSystem.Data.csproj", "{F062B80C-1A62-4F44-8334-056FB47185DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AircraftReservationSystem.Data", "AircraftReservationSystem.Data\AircraftReservationSystem.Data.csproj", "{F062B80C-1A62-4F44-8334-056FB47185DE}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B92F3B67-5A61-4CBB-AC83-89985E96D714} = {B92F3B67-5A61-4CBB-AC83-89985E96D714}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AircraftReservationSystem.Entity", "AircraftReservationSystem.Entity\AircraftReservationSystem.Entity.csproj", "{B92F3B67-5A61-4CBB-AC83-89985E96D714}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AircraftReservationSystem.Entity", "AircraftReservationSystem.Entity\AircraftReservationSystem.Entity.csproj", "{B92F3B67-5A61-4CBB-AC83-89985E96D714}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AircraftReservationSystem.Utility", "AircraftReservationSystem.Utility\AircraftReservationSystem.Utility.csproj", "{327110D6-E0E5-4F57-98F7-44D0DE3FB661}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +36,10 @@ Global
 		{B92F3B67-5A61-4CBB-AC83-89985E96D714}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B92F3B67-5A61-4CBB-AC83-89985E96D714}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B92F3B67-5A61-4CBB-AC83-89985E96D714}.Release|Any CPU.Build.0 = Release|Any CPU
+		{327110D6-E0E5-4F57-98F7-44D0DE3FB661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{327110D6-E0E5-4F57-98F7-44D0DE3FB661}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{327110D6-E0E5-4F57-98F7-44D0DE3FB661}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{327110D6-E0E5-4F57-98F7-44D0DE3FB661}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

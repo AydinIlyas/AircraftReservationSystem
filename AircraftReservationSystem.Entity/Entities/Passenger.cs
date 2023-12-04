@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,15 +8,14 @@ using System.Threading.Tasks;
 
 namespace AircraftReservationSystem.Entity.Entities
 {
-    public class Passenger
+    public class Passenger: IdentityUser
     {
         public Passenger()
         {
         }
 
-        public Passenger(int id, string firstname, string lastname, string passportNumber, string email, string phoneNumber, DateTime birthDate, ICollection<SoldTicket> soldTicket)
+        public Passenger( string firstname, string lastname, string passportNumber, string email, string phoneNumber, DateTime birthDate, ICollection<SoldTicket> soldTicket)
         {
-            Id = id;
             Firstname = firstname;
             Lastname = lastname;
             PassportNumber = passportNumber;
@@ -24,9 +24,6 @@ namespace AircraftReservationSystem.Entity.Entities
             BirthDate = birthDate;
             SoldTickets = soldTicket;
         }
-
-        [Key]
-        public int Id { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 2,ErrorMessage = "Your name must be between 2-50 characters!")]

@@ -1,4 +1,5 @@
 ﻿using AircraftReservationSystem.Entity.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AircraftReservationSystem.Data.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext()
         {
@@ -39,6 +40,7 @@ namespace AircraftReservationSystem.Data.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<PaymentInformation>()
             .HasOne(pi => pi.PaymentType)
             .WithMany(pt => pt.PaymentInformations)

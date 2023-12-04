@@ -14,7 +14,7 @@ namespace AircraftReservationSystem.Entity.Entities
         {
         }
 
-        public SoldTicket(int id, string seatNumber, float totalPrice, PaymentInformation? paymentInformation, Passenger passenger, int passengerId, FlightClass flightClass, int flightClassId, FlightTicket? flightTicket)
+        public SoldTicket(int id, string seatNumber, float totalPrice, PaymentInformation? paymentInformation, Passenger passenger, string passengerId, FlightClass flightClass, int flightClassId, FlightTicket? flightTicket)
         {
             Id = id;
             SeatNumber = seatNumber;
@@ -39,7 +39,7 @@ namespace AircraftReservationSystem.Entity.Entities
         public PaymentInformation? PaymentInformation { get; set; }
         [ForeignKey("PassengerId")]
         public Passenger Passenger { get; set; }
-        public int PassengerId { get; set; }
+        public string PassengerId { get; set; }
         [ForeignKey("FlightClassId")]
         public FlightClass FlightClass { get; set; }
         public int FlightClassId { get; set; }
