@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AircraftReservationSystem.Entity.Entities
+namespace AircraftReservationSystem.Models
 {
     public class PaymentInformation
     {
@@ -26,9 +26,9 @@ namespace AircraftReservationSystem.Entity.Entities
         }
 
         [Key]
-        public int Id{ get; set; }
+        public int Id { get; set; }
 
-        [Required] 
+        [Required]
         public string CardNumber { get; set; }
 
         [Required]
@@ -39,6 +39,6 @@ namespace AircraftReservationSystem.Entity.Entities
 
         public SoldTicket SoldTicket { get; set; }
         public int SoldTicketId { get; set; }
-        
+
     }
 }

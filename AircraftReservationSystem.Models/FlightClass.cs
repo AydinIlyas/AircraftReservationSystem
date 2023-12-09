@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AircraftReservationSystem.Entity.Entities
+namespace AircraftReservationSystem.Models
 {
     public class FlightClass
     {
@@ -44,5 +44,5 @@ namespace AircraftReservationSystem.Entity.Entities
         public Airline Airline { get; set; }
         public int AirlineId { get; set; }
 
-}
+    }
 }

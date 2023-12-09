@@ -1,4 +1,4 @@
-﻿using AircraftReservationSystem.Entity.Entities;
+﻿using AircraftReservationSystem.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AircraftReservationSystem.Data.Data
+namespace AircraftReservationSystem.DataAccess.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

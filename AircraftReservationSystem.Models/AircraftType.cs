@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AircraftReservationSystem.Entity.Entities
+namespace AircraftReservationSystem.Models
 {
     public class AircraftType
     {

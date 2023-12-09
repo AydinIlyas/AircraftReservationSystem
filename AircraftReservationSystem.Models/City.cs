@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AircraftReservationSystem.Entity.Entities
+namespace AircraftReservationSystem.Models
 {
     public class City
     {
@@ -33,7 +33,7 @@ namespace AircraftReservationSystem.Entity.Entities
         [Required]
         public string Code { get; set; }
         public Country Country { get; set; }
-        public int CountryId { get; set; }  
+        public int CountryId { get; set; }
 
         public ICollection<District> Districts { get; set; }
 

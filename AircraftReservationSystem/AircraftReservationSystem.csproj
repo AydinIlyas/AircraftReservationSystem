@@ -18,8 +18,13 @@
 	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	</PackageReference>
 	<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
-    <ProjectReference Include="..\AircraftReservationSystem.Data\AircraftReservationSystem.Data.csproj" />
+	<ProjectReference Include="..\AircraftReservationSystem.DataAccess\AircraftReservationSystem.DataAccess.csproj" />
     <ProjectReference Include="..\AircraftReservationSystem.Utility\AircraftReservationSystem.Utility.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Views\" />
   </ItemGroup>
 
 </Project>

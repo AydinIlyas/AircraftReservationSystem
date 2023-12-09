@@ -1,8 +1,8 @@
-using AircraftReservationSystem.Data.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using AircraftReservationSystem.Utility;
+using AircraftReservationSystem.DataAccess.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

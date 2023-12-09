@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AircraftReservationSystem.Entity.Entities
+namespace AircraftReservationSystem.Models
 {
     public class Flight
     {
@@ -57,13 +57,13 @@ namespace AircraftReservationSystem.Entity.Entities
         public bool IsDisabledFlight { get; set; }
 
         public Aircraft Aircraft { get; set; }
-        public int AirCraftId {  get; set; }
+        public int AirCraftId { get; set; }
         [ForeignKey("DepartureAirportId")]
         public Airport DepartureAirport { get; set; }
         public int DepartureAirportId { get; set; }
         [ForeignKey("ArrivalAirportId")]
         public Airport ArrivalAirport { get; set; }
-        public int ArrivalAirportId { get; set;}
+        public int ArrivalAirportId { get; set; }
 
         public ICollection<FlightTicket> FlightTickets { get; set; }
 

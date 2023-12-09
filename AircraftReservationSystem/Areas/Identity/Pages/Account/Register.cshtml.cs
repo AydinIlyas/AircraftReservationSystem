@@ -10,7 +10,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
-using AircraftReservationSystem.Entity.Entities;
+using AircraftReservationSystem.Models;
 using AircraftReservationSystem.Utility;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;

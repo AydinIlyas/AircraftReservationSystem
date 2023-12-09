@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AircraftReservationSystem.Entity.Entities
+namespace AircraftReservationSystem.Models
 {
     public class FlightTicket
     {
@@ -25,12 +25,12 @@ namespace AircraftReservationSystem.Entity.Entities
 
         [Required]
         public string SeatNumber { get; set; }
-        
+
         public bool IsAvailable { get; set; }
         public SoldTicket SoldTicket { get; set; }
         public int SoldTicketId { get; set; }
         public Flight Flight { get; set; }
         public int FlightId { get; set; }
-        
+
     }
 }

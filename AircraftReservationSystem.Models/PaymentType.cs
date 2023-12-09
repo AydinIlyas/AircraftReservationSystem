@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AircraftReservationSystem.Entity.Entities
+namespace AircraftReservationSystem.Models
 {
     public class PaymentType
     {
@@ -24,9 +24,9 @@ namespace AircraftReservationSystem.Entity.Entities
         public int Id { get; set; }
 
         [Required]
-        public string PaymentTypeName{ get; set; }
+        public string PaymentTypeName { get; set; }
 
-        public ICollection<PaymentInformation>PaymentInformations { get; set; }
+        public ICollection<PaymentInformation> PaymentInformations { get; set; }
 
     }
 }
