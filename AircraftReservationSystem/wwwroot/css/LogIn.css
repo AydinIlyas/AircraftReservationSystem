@@ -1,0 +1,27 @@
+﻿body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.main {
+    display: flex;
+    background-image: url('/images/loginBackground.jpg');
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    justify-content: end;
+    align-items: end;
+}
+
+.card {
+    margin-right: 12vw;
+    margin-bottom: 17vh;
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.card-body {
+    min-width: 31vw;
+}
