@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace AircraftReservationSystem.DataAccess.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<Passenger>
     {
         public ApplicationDbContext()
         {

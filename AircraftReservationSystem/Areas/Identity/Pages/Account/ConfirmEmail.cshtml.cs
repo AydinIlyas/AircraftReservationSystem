@@ -17,9 +17,9 @@ namespace AircraftReservationSystem.Areas.Identity.Pages.Account
 {
     public class ConfirmEmailModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<Passenger> _userManager;
 
-        public ConfirmEmailModel(UserManager<IdentityUser> userManager)
+        public ConfirmEmailModel(UserManager<Passenger> userManager)
         {
             _userManager = userManager;
         }

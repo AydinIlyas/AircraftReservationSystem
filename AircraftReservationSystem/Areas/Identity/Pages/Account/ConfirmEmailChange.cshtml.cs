@@ -16,10 +16,10 @@ namespace AircraftReservationSystem.Areas.Identity.Pages.Account
 {
     public class ConfirmEmailChangeModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<Passenger> _userManager;
+        private readonly SignInManager<Passenger> _signInManager;
 
-        public ConfirmEmailChangeModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public ConfirmEmailChangeModel(UserManager<Passenger> userManager, SignInManager<Passenger> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
