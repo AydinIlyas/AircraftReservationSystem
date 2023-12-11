@@ -30,9 +30,7 @@ namespace AircraftReservationSystem.Models
         [Required]
         public string Name { get; set; }
 
-
-        [Required]
-        public string Code { get; set; }
+        public string? Code { get; set; }
 
         public City City { get; set; }
         public int CityId { get; set; }

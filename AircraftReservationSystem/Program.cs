@@ -3,6 +3,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using AircraftReservationSystem.Utility;
 using AircraftReservationSystem.DataAccess.Data;
+using BulkyBook.DataAccess.Repository.IRepository;
+using AircraftReservationSystem.DataAccess.Repository;
+using AircraftReservationSystem.Areas.User.Services;
+using AircraftReservationSystem.Areas.Admin.Services;
+using AircraftReservationSystem.Areas.Admin.Services.Interfaces;
+using AircraftReservationSystem.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +21,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 
 builder.Services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+});
 builder.Services.AddRazorPages();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IFlightService, FlightService>();
+builder.Services.AddScoped<ILocationService, LocationService>();
+builder.Services.AddScoped<IAirportService, AirportService>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 var app = builder.Build();
 
