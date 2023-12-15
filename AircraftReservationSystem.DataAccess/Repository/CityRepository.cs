@@ -1,6 +1,7 @@
 ﻿using AircraftReservationSystem.DataAccess.Data;
 using AircraftReservationSystem.DataAccess.Repository.IRepository;
 using AircraftReservationSystem.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,10 @@ namespace AircraftReservationSystem.DataAccess.Repository
         {
             _db = db;
         }
-    }
+
+		public async Task<IEnumerable<City>> GetAllAsync()
+		{
+            return await _db.Cities.ToListAsync();
+		}
+	}
 }

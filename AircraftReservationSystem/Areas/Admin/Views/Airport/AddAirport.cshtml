@@ -1,81 +1,102 @@
 ﻿@model AircraftReservationSystem.Models.ViewModels.AirportViewModel
-
-
-<h1>View</h1>
-
 <h4>Airport</h4>
 <hr />
+
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="AddAirport">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Airport.Name" ></label>
-                <input asp-for="Airport.Name" class="form-control" />
-                <span asp-validation-for="Airport.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Airport.AirportCode"></label>
-                <input asp-for="Airport.AirportCode" class="form-control" />
-                <span asp-validation-for="Airport.AirportCode" class="text-danger"></span>
-            </div>
+    <div class="col-md-6 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="AddAirport" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label asp-for="SelectedCity">City:</label>
-                <select asp-for="SelectedCity">
-                @{
-                    List<City> list = ViewBag.Cities as List<City>;
-                    foreach(City c in list)
-                    {
-                            <option value="@c.Id">@c.Name</option>
-                    }
-                }
-                </select>
-            </div>
-            <div class="form-group">
-                <label asp-for="SelectedDistrict">District:</label>
-                <select asp-for="SelectedDistrict">
-                @{
-                    List<District> districts = ViewBag.Districts as List<District>;
-                    foreach(District d in districts)
-                    {
-                            <option value="@d.Id">@d.Name</option>
-                    }
-                }
-                </select>
-            </div>
-            <div class="form-group">
-                <label asp-for="SelectedCountry">Country:</label>
-                <select asp-for="SelectedCountry">
-                @{
-                    List<Country> countries = ViewBag.Countries as List<Country>;
-                    foreach(Country c in countries)
-                    {
-                            <option value="@c.Id">@c.Name</option>
-                    }
-                }
-                </select>
-            </div>
-           @*  <div class="form-group">
-                <label asp-for="CityId">City:</label>
-                @Html.DropDownListFor(model => model.SelectedCity, new SelectList(ViewBag.Cities?? new List<City>(), "CityId", "Name"), "-- Select City --", new { @class = "form-control" })
-            </div>
-            <div class="form-group">
-                <label asp-for="DistrictId">District:</label>
-                @Html.DropDownListFor(model => model.SelectedDistrict, new SelectList(ViewBag.Districts?? new List<District>(), "DistrictId", "Name"), "-- Select District --", new { @class = "form-control" })
-            </div> *@
+                    <div class="form-group">
+                        <label asp-for="Airport.Name">Airport Name:</label>
+                        <input asp-for="Airport.Name" class="form-control" />
+                        <span asp-validation-for="Airport.Name" class="text-danger"></span>
+                    </div>
 
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                    <div class="form-group">
+                        <label asp-for="Airport.AirportCode">Airport Code:</label>
+                        <input asp-for="Airport.AirportCode" class="form-control" />
+                        <span asp-validation-for="Airport.AirportCode" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="CountryId">Country:</label>
+                        <select asp-for="CountryId" id="Country" class="form-control" onchange="loadCities()">
+                            @{
+                                List<Country> countries = ViewBag.Countries as List<Country>;
+                                foreach (Country c in countries)
+                                {
+                                    <option value="@c.Id">@c.Name</option>
+                                }
+                            }
+                            <option value="" selected>--Country--</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="CityId">City:</label>
+                        <select asp-for="CityId" id="City" class="form-control" onchange="loadDistricts()">
+                            <option selected>--City--</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="DistrictId">District:</label>
+                        <select asp-for="DistrictId" id="District" class="form-control">
+                            <option selected>--District--</option>
+                        </select>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 mt-3">
+                            <div class="form-group">
+                                <input type="submit" value="Create" class="btn btn-primary btn-block" />
+                            </div>
+                        </div>
+                        <div class="col-md-6"></div>
+                        <div class="col-md-3 mt-3">
+                            <div class="form-group">
+                                <a asp-action="Index" class="btn btn-secondary btn-block">Back to List</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        function loadCities() {
+            var countryId = $('#Country').val();
+            $.get('/api/locations/cities', { countryId: countryId }, function (data) {
+                // Populate the City dropdown with data
+                $('#City').empty();
+                $.each(data, function (index, city) {
+                    $('#City').append('<option value="' + city.id + '">' + city.name + '</option>');
+                });
+            });
+        }
+
+        function loadDistricts() {
+            var cityId = $('#City').val();
+            $.get('/api/locations/districts', { cityId: cityId }, function (data) {
+                // Populate the District dropdown with data
+                $('#District').empty();
+                $.each(data, function (index, district) {
+                    $('#District').append('<option value="' + district.id + '">' + district.name + '</option>');
+                });
+            });
+        }
+        $(document).ready(function () {
+            loadCities();
+        });
+    </script>
 }

@@ -27,7 +27,7 @@ namespace AircraftReservationSystem.Areas.Admin.Services
             {
                 Name = airportViewModel.Airport.Name,
                 AirportCode = airportViewModel.Airport.AirportCode,
-                DistrictId = (int)airportViewModel.SelectedDistrict
+                DistrictId = (int)airportViewModel.DistrictId
             };
             _unitOfWork.Airport.Add(airport);
             _unitOfWork.Save();

@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace AircraftReservationSystem.DataAccess.Repository.IRepository
 {
-    public interface ICountryRepository : IRepository<Country>
-    {
-    }
+	public interface ICountryRepository : IRepository<Country>
+	{
+		Task<IEnumerable<Country>> GetAllAsync();
+	}
 }

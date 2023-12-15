@@ -49,8 +49,14 @@ app.UseAuthentication();;
 
 app.UseAuthorization();
 app.MapRazorPages();
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{area=User}/{controller=Home}/{action=Index}/{id?}");
+app.UseEndpoints(endpoints =>
+{
+	endpoints.MapRazorPages();
+	endpoints.MapControllers(); // Map Web API controllers
+
+	endpoints.MapControllerRoute(
+		name: "default",
+		pattern: "{area=User}/{controller=Home}/{action=Index}/{id?}");
+});
 
 app.Run();

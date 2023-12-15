@@ -17,5 +17,14 @@ namespace AircraftReservationSystem.DataAccess.Repository
         {
             _db = db;
         }
-    }
+
+		public void Update(Passenger obj)
+		{
+			_db.Passengers.Update(obj);
+		}
+        public void Delete(Passenger obj)
+        {
+            _db.Passengers.Remove(obj);
+        }
+	}
 }

@@ -30,10 +30,9 @@ namespace AircraftReservationSystem.Areas.Admin.Controllers
         public IActionResult AddAirport() {
             var viewModel = new AirportViewModel();
             ViewBag.Countries = locationService.GetCountries();
-            ViewBag.Cities = locationService.GetCities();
-            ViewBag.Districts = locationService.GetDistricts();
             return View("AddAirport",viewModel);
         }
+
         [HttpPost]
         public IActionResult AddAirport(AirportViewModel airportViewModel)
         {
@@ -41,17 +40,9 @@ namespace AircraftReservationSystem.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //private List<Country> GetCountries()
-        //{
-        //    return locationService.GetCountries();
-        //}
-        //private List<City> GetCities()
-        //{
-        //    return locationService.GetCities();
-        //}
-        //private List<District> GetDistricts()
-        //{
-        //    return locationService.GetDistricts();
-        //}
+        private List<Country> GetCountries()
+        {
+            return locationService.GetCountries();
+        }
     }
 }

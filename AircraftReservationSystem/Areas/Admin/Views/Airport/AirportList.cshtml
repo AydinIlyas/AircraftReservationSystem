@@ -6,42 +6,58 @@
 
 <h1>View</h1>
 
-<p>
-    <a asp-action="AddAirport">Add new airport</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AirportCode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.District)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AirportCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.District.Code)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-dark">User List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Airport" asp-action="AddAirport" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i>&nbsp; Add New Airport
+            </a>
+        </div>
+    </div>
+
+    <br /><br />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AirportCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.District)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AirportCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DistrictId)
+                    </td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a asp-controller="Airport" asp-action="Edit" asp-route-id="@item.Id"
+                               class="btn btn-primary"> <i class="bi bi-pencil-square"></i> Edit</a>
+                            <a asp-controller="Airport" asp-action="Delete" asp-route-id="@item.Id"
+                               class="btn btn-danger"> <i class="bi bi-trash-fill"></i> Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

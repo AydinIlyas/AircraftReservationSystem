@@ -20,6 +20,7 @@
 	<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
 	<ProjectReference Include="..\AircraftReservationSystem.DataAccess\AircraftReservationSystem.DataAccess.csproj" />
     <ProjectReference Include="..\AircraftReservationSystem.Utility\AircraftReservationSystem.Utility.csproj" />
+    <ProjectReference Include="..\AircraftReservationSystem.WebApi\AircraftReservationSystem.WebApi.csproj" />
   </ItemGroup>
 
 </Project>

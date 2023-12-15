@@ -19,6 +19,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AircraftReservationSystem.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AircraftReservationSystem.Models", "AircraftReservationSystem.Models\AircraftReservationSystem.Models.csproj", "{D3845188-AD7B-4248-BF7D-0F1E73B413FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AircraftReservationSystem.WebApi", "AircraftReservationSystem.WebApi\AircraftReservationSystem.WebApi.csproj", "{EC1843E0-8EF1-4EBB-8FD7-A97FF0BE7EAB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AF1FA5C0-4005-44F5-9236-D54DC1E65B76} = {AF1FA5C0-4005-44F5-9236-D54DC1E65B76}
+		{D3845188-AD7B-4248-BF7D-0F1E73B413FD} = {D3845188-AD7B-4248-BF7D-0F1E73B413FD}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +47,10 @@ Global
 		{D3845188-AD7B-4248-BF7D-0F1E73B413FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3845188-AD7B-4248-BF7D-0F1E73B413FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3845188-AD7B-4248-BF7D-0F1E73B413FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC1843E0-8EF1-4EBB-8FD7-A97FF0BE7EAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC1843E0-8EF1-4EBB-8FD7-A97FF0BE7EAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC1843E0-8EF1-4EBB-8FD7-A97FF0BE7EAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC1843E0-8EF1-4EBB-8FD7-A97FF0BE7EAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

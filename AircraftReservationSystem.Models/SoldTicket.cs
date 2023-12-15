@@ -38,8 +38,8 @@ namespace AircraftReservationSystem.Models
 
         public PaymentInformation? PaymentInformation { get; set; }
         [ForeignKey("PassengerId")]
-        public Passenger Passenger { get; set; }
-        public string PassengerId { get; set; }
+        public Passenger? Passenger { get; set; }
+        public string? PassengerId { get; set; }
         [ForeignKey("FlightClassId")]
         public FlightClass FlightClass { get; set; }
         public int FlightClassId { get; set; }

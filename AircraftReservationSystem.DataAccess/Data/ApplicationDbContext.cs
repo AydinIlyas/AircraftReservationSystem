@@ -53,6 +53,11 @@ namespace AircraftReservationSystem.DataAccess.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Passenger>()
+                .HasMany(s => s.SoldTickets)
+                .WithOne(st => st.Passenger)
+                .HasForeignKey(st=>st.PassengerId)
+                .IsRequired(false);
             modelBuilder.Entity<PaymentInformation>()
             .HasOne(pi => pi.PaymentType)
             .WithMany(pt => pt.PaymentInformations)

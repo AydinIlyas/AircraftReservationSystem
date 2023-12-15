@@ -9,5 +9,7 @@ namespace AircraftReservationSystem.DataAccess.Repository.IRepository
 {
     public interface IPassengerRepository:IRepository<Passenger>
     {
-    }
+		void Update(Passenger passenger);
+		void Delete(Passenger passenger);
+	}
 }
