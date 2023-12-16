@@ -1,0 +1,25 @@
+﻿/* Resetting some default styles */
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set background image for the entire viewport */
+body {
+    background-image: url('/images/homepageBackground.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+/*TODO Collapsed Navbar, Footer responsiveness.*/
+
+/* Main container styling */
+#mainContainer {
+    margin: 0;
+    padding: 0;
+    margin-top:auto;
+    margin-bottom:auto;
+}

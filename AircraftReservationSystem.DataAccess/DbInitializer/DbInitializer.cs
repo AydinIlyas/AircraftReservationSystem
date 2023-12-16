@@ -42,24 +42,27 @@ namespace AircraftReservationSystem.DataAccess.DbInitializer
             {
 
             }
-			//create roles if they are not created
-			if (!_db.Countries.Any())
-			{
-				// Execute the SQL script
-				var sqlScriptCountry = File.ReadAllText("./Data/Countries.sql");
-				_db.Database.ExecuteSqlRaw(sqlScriptCountry);
+            //create roles if they are not created
+            if (!_db.Countries.Any())
+            {
+                // Execute the SQL script
+                var sqlScriptCountry = File.ReadAllText("./Data/Countries.sql");
+                _db.Database.ExecuteSqlRaw(sqlScriptCountry);
                 var sqlScriptCity = File.ReadAllText("./Data/Cities.sql");
-				_db.Database.ExecuteSqlRaw(sqlScriptCity);
-				var sqlScriptDistrict = File.ReadAllText("./Data/Districts.sql");
-				_db.Database.ExecuteSqlRaw(sqlScriptDistrict);
+                _db.Database.ExecuteSqlRaw(sqlScriptCity);
+                var sqlScriptDistrict = File.ReadAllText("./Data/Districts.sql");
+                _db.Database.ExecuteSqlRaw(sqlScriptDistrict);
 
-			}
-			//create roles if they are not created
-			if (!_roleManager.RoleExistsAsync(ROLES.Role_Admin).GetAwaiter().GetResult())
+            }
+            //create roles if they are not created
+            if (!_roleManager.RoleExistsAsync(ROLES.Role_Admin).GetAwaiter().GetResult())
             {
                 _roleManager.CreateAsync(new IdentityRole(ROLES.Role_Admin)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(ROLES.Role_User)).GetAwaiter().GetResult();
-
+            }
+            var adminUser = _userManager.FindByEmailAsync("admin@gmail.com").GetAwaiter().GetResult();
+            if (adminUser == null)
+            {
                 //if roles are not created, then we will create admin user as well
 
                 _userManager.CreateAsync(new Passenger
@@ -71,25 +74,25 @@ namespace AircraftReservationSystem.DataAccess.DbInitializer
                     PassportNumber = "12345678910",
                     BirthDate = DateTime.Now,
                     SoldTickets = null
-                },"Admin123*").GetAwaiter().GetResult();
-				_userManager.CreateAsync(new Passenger
-				{
-					UserName = "user@gmail.com",
-					Email = "user@gmail.com",
-					Firstname = "user",
-					Lastname = "user",
-					PassportNumber = "12345678910",
-					BirthDate = DateTime.Now,
-					SoldTickets = null
-				}, "User123*").GetAwaiter().GetResult();
+                }, "Admin123*").GetAwaiter().GetResult();
+                _userManager.CreateAsync(new Passenger
+                {
+                    UserName = "user@gmail.com",
+                    Email = "user@gmail.com",
+                    Firstname = "user",
+                    Lastname = "user",
+                    PassportNumber = "12345678910",
+                    BirthDate = DateTime.Now,
+                    SoldTickets = null
+                }, "User123*").GetAwaiter().GetResult();
 
-				Passenger admin = _db.Passengers.FirstOrDefault(u => u.Email == "admin@gmail.com");
-				Passenger user = _db.Passengers.FirstOrDefault(u => u.Email == "user@gmail.com");
+                Passenger admin = _db.Passengers.FirstOrDefault(u => u.Email == "admin@gmail.com");
+                Passenger user = _db.Passengers.FirstOrDefault(u => u.Email == "user@gmail.com");
 
                 _userManager.AddToRoleAsync(admin, ROLES.Role_Admin).GetAwaiter().GetResult();
                 _userManager.AddToRoleAsync(user, ROLES.Role_User).GetAwaiter().GetResult();
-
             }
+
             return;
         }
     }
