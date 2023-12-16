@@ -8,14 +8,15 @@ html {
   }
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+.nav-item-hover {
+    border-bottom: 2px solid transparent; /* Set your desired border style */
+    transition: border-bottom-color 0.3s ease;
 }
 
-body {
-    margin-bottom: 60px;
-}
+    .nav-item-hover:hover {
+        border-bottom-color: #fff;
+    }
+
 
 
 

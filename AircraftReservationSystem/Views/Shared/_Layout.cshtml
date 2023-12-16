@@ -4,41 +4,61 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - AircraftReservationSystem</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/bootswatch.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AircraftReservationSystem.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 </head>
+
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg bg-primary " data-bs-theme="dark">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AircraftReservationSystem</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand text-light" href="#">OUcus</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <li class="nav-item nav-item-hover">
+                            <a class="nav-link active custom-hover" href="#">
+                                Home
+                                <span class="visually-hidden">(current)</span>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li class="nav-item nav-item-hover">
+                            <a class="nav-link text-light custom-hover" href="#">Features</a>
+                        </li>
+                        <li class="nav-item nav-item-hover">
+                            <a class="nav-link text-light" href="#">Pricing</a>
+                        </li>
+                        <li class="nav-item nav-item-hover">
+                            <a class="nav-link text-light" href="#">About</a>
+                        </li>
+                        <li class="nav-item dropdown nav-item-hover ">
+                            <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item text-light" href="#">Action</a>
+                                <a class="dropdown-item text-light" href="#">Another action</a>
+                                <a class="dropdown-item text-light" href="#">Something else here</a>
+                                <div class="dropdown-divider text-light"></div>
+                                <a class="dropdown-item text-light" href="#">Separated link</a>
+                            </div>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
+
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div id="mainContainer">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="footer text-muted bg-primary">
         <div class="container">
             &copy; 2023 - AircraftReservationSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
