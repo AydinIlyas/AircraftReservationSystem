@@ -21,19 +21,16 @@
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item nav-item-hover">
-                            <a class="nav-link active custom-hover" href="#">
+                            <a class="nav-link active custom-hover" asp-controller="Home" asp-action="Index">
                                 Home
                                 <span class="visually-hidden">(current)</span>
                             </a>
                         </li>
                         <li class="nav-item nav-item-hover">
-                            <a class="nav-link text-light custom-hover" href="#">Features</a>
+                            <a class="nav-link text-light custom-hover" asp-area="Admin" asp-controller="User" asp-action="Index">User Management</a>
                         </li>
                         <li class="nav-item nav-item-hover">
-                            <a class="nav-link text-light" href="#">Pricing</a>
-                        </li>
-                        <li class="nav-item nav-item-hover">
-                            <a class="nav-link text-light" href="#">About</a>
+                            <a class="nav-link text-light" asp-area="Admin" asp-controller="Airport" asp-action="Index">Airport Management</a>
                         </li>
                         <li class="nav-item dropdown nav-item-hover ">
                             <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
