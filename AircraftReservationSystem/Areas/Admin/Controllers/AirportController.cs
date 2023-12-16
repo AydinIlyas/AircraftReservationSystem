@@ -13,11 +13,9 @@ namespace AircraftReservationSystem.Areas.Admin.Controllers
     public class AirportController : Controller
     {
         private readonly IAirportService airportService;
-        private readonly ILocationService locationService;
-        public AirportController(IAirportService airportService,ILocationService locationService)
+        public AirportController(IAirportService airportService)
         {
             this.airportService = airportService;
-            this.locationService = locationService;
         }
 
         [HttpGet]
