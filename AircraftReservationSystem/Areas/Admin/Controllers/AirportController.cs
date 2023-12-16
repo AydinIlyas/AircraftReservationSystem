@@ -59,13 +59,27 @@ namespace AircraftReservationSystem.Areas.Admin.Controllers
 			return View("EditAirport",viewModel);
 		}
 
-        public IActionResult EditAirport(AirportViewModel airportVM)
+
+        public IActionResult DeleteConfirmed(int id)
         {
-            Airport airport = airportVM.Airport;
-            airport.DistrictId = (int)airportVM.DistrictId;
-            airportService.UpdateAirport(airport);
+            var airport = airportService.GetAirportById(id);
+
+            if (airport == null)
+            {
+                return NotFound();
+            }
+
+            airportService.DeleteAirport(airport);
+
+            var updatedAirports = airportService.GetAirports().Where(a => a.Id != id);
+
+            TempData["DeleteSuccessMessage"] = $"Airport '{airport.Name}' deleted successfully.";
+
+
             return RedirectToAction("Index");
         }
+
+
 
     }
 }

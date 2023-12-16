@@ -4,12 +4,17 @@
     ViewData["Title"] = "View";
 }
 
-<h1>View</h1>
 
 <div class="container p-3">
+    @if (TempData["DeleteSuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["DeleteSuccessMessage"]
+        </div>
+    }
     <div class="row pt-4">
         <div class="col-6">
-            <h2 class="text-dark">User List</h2>
+            <h2 class="text-dark">Airport List</h2>
         </div>
         <div class="col-6 text-end">
             <a asp-controller="Airport" asp-action="AddAirport" class="btn btn-primary">
@@ -50,14 +55,36 @@
                     </td>
                     <td>
                         <div class="btn-group" role="group">
-                            <a asp-controller="Airport" asp-action="Edit" asp-route-id="@item.Id"
-                               class="btn btn-primary"> <i class="bi bi-pencil-square"></i> Edit</a>
-                            <a asp-controller="Airport" asp-action="Delete" asp-route-id="@item.Id"
-                               class="btn btn-danger"> <i class="bi bi-trash-fill"></i> Delete</a>
+                            <a asp-controller="Airport" asp-action="EditAirport" asp-route-id="@item.Id"
+                           class="btn btn-primary"> <i class="bi bi-pencil-square"></i> Edit</a>
+                            <a class="btn btn-danger" data-item-id="@item.Id"> <i class="bi bi-trash-fill"></i> Delete</a>
                         </div>
                     </td>
                 </tr>
+                <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmation</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete the item with the name '@item.Name'?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Give up</button>
+                                <a asp-controller="Airport" asp-action="DeleteConfirmed" asp-route-id="@item.Id" class="btn btn-danger" id="confirmDelete">Confirm</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             }
         </tbody>
+
     </table>
 </div>
+@section scripts {
+    <script src="~/js/AirportList.js"></script>
+}

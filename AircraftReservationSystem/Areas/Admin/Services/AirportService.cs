@@ -51,5 +51,11 @@ namespace AircraftReservationSystem.Areas.Admin.Services
                 return null;
             }
 		}
-	}
+
+        public void DeleteAirport(Airport airport)
+        {
+            _unitOfWork.Airport.Remove(airport);
+            _unitOfWork.Save();
+        }
+    }
 }
