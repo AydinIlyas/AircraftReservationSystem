@@ -1,7 +1,7 @@
 ﻿using AircraftReservationSystem.DataAccess.Data;
 using AircraftReservationSystem.Models;
 using AircraftReservationSystem.Utility;
-using BulkyBook.DataAccess.Repository.IRepository;
+using AircraftReservationSystem.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

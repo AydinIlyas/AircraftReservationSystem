@@ -1,7 +1,7 @@
 ﻿using AircraftReservationSystem.Areas.Admin.Services.Interfaces;
 using AircraftReservationSystem.Models;
 using AircraftReservationSystem.Models.ViewModels;
-using BulkyBook.DataAccess.Repository.IRepository;
+using AircraftReservationSystem.DataAccess.Repository.IRepository;
 
 namespace AircraftReservationSystem.Areas.Admin.Services
 {

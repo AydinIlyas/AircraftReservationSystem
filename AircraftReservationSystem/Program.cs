@@ -3,12 +3,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using AircraftReservationSystem.Utility;
 using AircraftReservationSystem.DataAccess.Data;
-using BulkyBook.DataAccess.Repository.IRepository;
+using AircraftReservationSystem.DataAccess.Repository.IRepository;
 using AircraftReservationSystem.DataAccess.Repository;
 using AircraftReservationSystem.Areas.User.Services;
 using AircraftReservationSystem.Areas.Admin.Services;
 using AircraftReservationSystem.Areas.Admin.Services.Interfaces;
 using AircraftReservationSystem.Models;
+using AircraftReservationSystem.DataAccess.DbInitializer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = "/Identity/Account/AccessDenied";
 });
 builder.Services.AddRazorPages();
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IFlightService, FlightService>();
 builder.Services.AddScoped<IAirportService, AirportService>();
@@ -44,6 +46,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+SeedDatabase();
 app.UseAuthentication();;
 
 app.UseAuthorization();
@@ -59,3 +62,12 @@ app.UseEndpoints(endpoints =>
 });
 
 app.Run();
+
+void SeedDatabase()
+{
+	using (var scope = app.Services.CreateScope())
+	{
+		var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+		dbInitializer.Initialize();
+	}
+}

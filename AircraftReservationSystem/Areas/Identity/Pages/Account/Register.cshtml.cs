@@ -120,11 +120,6 @@ namespace AircraftReservationSystem.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            if(!_roleManager.RoleExistsAsync(ROLES.Role_User).GetAwaiter().GetResult())
-            {
-                _roleManager.CreateAsync(new IdentityRole(ROLES.Role_User)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(ROLES.Role_Admin)).GetAwaiter().GetResult();
-            }
             Input = new() { RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem { Text = i, Value = i }) }; 
                 ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();

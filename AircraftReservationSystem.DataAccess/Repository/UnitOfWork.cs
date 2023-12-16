@@ -1,6 +1,6 @@
 ﻿using AircraftReservationSystem.DataAccess.Data;
 using AircraftReservationSystem.DataAccess.Repository.IRepository;
-using BulkyBook.DataAccess.Repository.IRepository;
+using AircraftReservationSystem.DataAccess.Repository.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AircraftReservationSystem.Models\AircraftReservationSystem.Models.csproj" />
+    <ProjectReference Include="..\AircraftReservationSystem.Utility\AircraftReservationSystem.Utility.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 ﻿using AircraftReservationSystem.Areas.User.Services;
 using AircraftReservationSystem.Models.ViewModels;
-using BulkyBook.DataAccess.Repository.IRepository;
+using AircraftReservationSystem.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 
 [Area("User")]

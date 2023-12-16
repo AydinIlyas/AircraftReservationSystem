@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BulkyBook.DataAccess.Repository.IRepository
+namespace AircraftReservationSystem.DataAccess.Repository.IRepository
 {
     public interface IUnitOfWork
     {
