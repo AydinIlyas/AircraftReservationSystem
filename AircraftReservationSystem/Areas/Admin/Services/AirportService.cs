@@ -33,5 +33,23 @@ namespace AircraftReservationSystem.Areas.Admin.Services
             _unitOfWork.Save();
         }
 
-    }
+		public void UpdateAirport(Airport airportViewModel)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Airport GetAirportById(int id)
+		{
+           Airport airport= _unitOfWork.Airport.GetFirstOrDefault(x => x.Id == id);
+            if (airport != null)
+            {
+                return airport;
+            }
+            else
+            {
+                _logger.LogWarning("Airport not found! Id: " + id);
+                return null;
+            }
+		}
+	}
 }

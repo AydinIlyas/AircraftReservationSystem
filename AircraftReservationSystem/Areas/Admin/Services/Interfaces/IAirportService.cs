@@ -7,6 +7,7 @@ namespace AircraftReservationSystem.Areas.Admin.Services.Interfaces
     {
         IEnumerable<Airport> GetAirports();
         void CreateAirport(AirportViewModel airportViewModel);
-
+        void UpdateAirport(Airport airportViewModel);
+        Airport GetAirportById(int id);
     }
 }

@@ -29,7 +29,6 @@ namespace AircraftReservationSystem.Areas.Admin.Controllers
 
         public IActionResult AddAirport() {
             var viewModel = new AirportViewModel();
-            ViewBag.Countries = locationService.GetCountries();
             return View("AddAirport",viewModel);
         }
 
@@ -40,9 +39,35 @@ namespace AircraftReservationSystem.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private List<Country> GetCountries()
+        public IActionResult EditAirport(int? id)
         {
-            return locationService.GetCountries();
+			if (id==null)
+			{
+				return NotFound();
+			}
+
+            Airport airport= airportService.GetAirportById((int)id);
+
+			if (airport == null)
+			{
+				return NotFound();
+			}
+            AirportViewModel viewModel = new AirportViewModel
+            {
+                Airport = airport,
+                DistrictId = id
+            };
+
+			return View("EditAirport",viewModel);
+		}
+
+        public IActionResult EditAirport(AirportViewModel airportVM)
+        {
+            Airport airport = airportVM.Airport;
+            airport.DistrictId = (int)airportVM.DistrictId;
+            airportService.UpdateAirport(airport);
+            return RedirectToAction("Index");
         }
+
     }
 }

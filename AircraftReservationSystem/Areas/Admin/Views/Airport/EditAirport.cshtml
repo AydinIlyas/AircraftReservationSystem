@@ -1,0 +1,53 @@
+﻿@model AircraftReservationSystem.Models.ViewModels.AirportViewModel
+
+<form method="post" asp-action="Edit">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Edit User</h2>
+			<hr />
+		</div>
+		@*<div asp-validation-summary="All"></div>*@
+		<div class="mb-3">
+			<label asp-for="Airport.Name"></label>
+			<input asp-for="Airport.Name" class="form-control" />
+			<span asp-validation-for="Airport.Name" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Airport.AirportCode"></label>
+			<input asp-for="Airport.AirportCode" class="form-control" />
+			<span asp-validation-for="Airport.AirportCode" class="text-danger"></span>
+		</div>
+		<div class="form-group">
+			<label asp-for="CountryId">Country:</label>
+			<select asp-for="CountryId" id="Country" class="form-control" onchange="loadCities()">
+				<option value="" selected>--Country--</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<label asp-for="CityId">City:</label>
+			<select asp-for="CityId" id="City" class="form-control" onchange="loadDistricts()">
+				<option selected>--City--</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<label asp-for="DistrictId">District:</label>
+			<select asp-for="DistrictId" id="District" class="form-control">
+				<option selected>--District--</option>
+			</select>
+		</div>
+		<button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+		<a asp-controller="Airport" asp-action="Index" class="btn btn-secondary" style="width:150px">
+			Back to List
+		</a>
+	</div>
+</form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<script src="~/js/selectLocation.js"></script>
+}
