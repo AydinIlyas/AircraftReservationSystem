@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using AircraftReservationSystem.Models;
 
 namespace AircraftReservationSystem.Models.ViewModels
 {
@@ -21,8 +18,37 @@ namespace AircraftReservationSystem.Models.ViewModels
         }
 
         public Airport? Airport { get; set; }
-        public int? CountryId { get; set; } = 1;
-        public int? CityId { get; set; } = 1;
-        public int? DistrictId { get; set; } = 1;
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public string AirportCode { get; set; }
+
+        public ICollection<Flight> Departures { get; set; }
+
+        public ICollection<Flight> Arrivals { get; set; }
+
+        public int DistrictId { get; set; }
+
+        public District District { get; set; }
+
+        public int CountryId { get; set; }
+
+        public int CityId { get; set; }
+
+        public Airport ToAirport()
+        {
+            return new Airport
+            {
+                Id = Id,
+                Name = Name,
+                AirportCode = AirportCode,
+                Departures = Departures,
+                Arrivals = Arrivals,
+                DistrictId = DistrictId,
+                District = District,
+            };
+        }
+
     }
 }

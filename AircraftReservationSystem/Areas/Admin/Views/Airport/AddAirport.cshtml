@@ -1,58 +1,56 @@
 ﻿@model AircraftReservationSystem.Models.ViewModels.AirportViewModel
-<h4>Airport</h4>
+
+
+<h4>Add Airport</h4>
 <hr />
 
 <div class="row">
     <div class="col-md-6 mx-auto">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body shadow-lg">
+                
                 <form asp-action="AddAirport" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                    <div class="form-group">
+                    <div class="form-group mt-1">
                         <label asp-for="Airport.Name">Airport Name:</label>
-                        <input asp-for="Airport.Name" class="form-control" />
+                        <input asp-for="Airport.Name" class="form-control mt-1" />
                         <span asp-validation-for="Airport.Name" class="text-danger"></span>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mt-1">
                         <label asp-for="Airport.AirportCode">Airport Code:</label>
-                        <input asp-for="Airport.AirportCode" class="form-control" />
+                        <input asp-for="Airport.AirportCode" class="form-control mt-1" />
                         <span asp-validation-for="Airport.AirportCode" class="text-danger"></span>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mt-1">
                         <label asp-for="CountryId">Country:</label>
-                        <select asp-for="CountryId" id="Country" class="form-control" onchange="loadCities()">
+                        <select asp-for="CountryId" id="Country" class="form-control mt-1" onchange="loadCities()">
                             <option value="" selected>--Country--</option>
                         </select>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mt-1">
                         <label asp-for="CityId">City:</label>
-                        <select asp-for="CityId" id="City" class="form-control"  onchange="loadDistricts()">
+                        <select asp-for="CityId" id="City" class="form-control mt-1" onchange="loadDistricts()">
                             <option selected>--City--</option>
                         </select>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mt-1">
                         <label asp-for="DistrictId">District:</label>
-                        <select asp-for="DistrictId" id="District" class="form-control">
+                        <select asp-for="DistrictId" id="District" class="form-control mt-1">
                             <option selected>--District--</option>
                         </select>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-3 mt-3">
-                            <div class="form-group">
-                                <input type="submit" value="Create" class="btn btn-primary btn-block" />
-                            </div>
+                    <div class="button-group mt-1">
+                        <div class="form-group">
+                            <a asp-action="Index" class="btn btn-secondary btn-block">Back to List</a>
                         </div>
-                        <div class="col-md-6"></div>
-                        <div class="col-md-3 mt-3">
-                            <div class="form-group">
-                                <a asp-action="Index" class="btn btn-secondary btn-block">Back to List</a>
-                            </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary btn-block mt-1" />
                         </div>
                     </div>
                 </form>
@@ -67,4 +65,6 @@
     }
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="~/js/selectLocation.js"></script>
+    <link rel="stylesheet" href="~/css/AddAirport.css">
+
 }
