@@ -18,7 +18,7 @@ namespace AircraftReservationSystem.WebApi.Controllers
 		}
 
 		[HttpGet("airports")]
-		public async Task<IEnumerable<Airport>> GetDistricts(string inputValue)
+		public async Task<IEnumerable<Airport>> GetAirports(string inputValue)
 		{
 
 			IEnumerable<Airport> airports = await _unitOfWork.Airport.GetAllAsync();

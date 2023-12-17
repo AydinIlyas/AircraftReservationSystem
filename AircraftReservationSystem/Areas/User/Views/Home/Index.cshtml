@@ -19,14 +19,18 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="departureAirport" class="form-label">Departure Airport</label>
-                                        <input type="text" class="form-control" id="departureAirport" placeholder="Enter Departure Airport">
+                                        <label asp-for="DepartureAirport" class="form-label" >Departure Airport</label>
+                                        <input asp-for="DepartureAirport" type="text" class="form-control" list="departureAirportOptions" id="departureAirport" oninput="SearchDepartureAirport()" placeholder="Enter Departure Airport" autocomplete="off">
+                                        <datalist id="departureAirportOptions">
+                                        </datalist>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="arrivalAirport" class="form-label">Arrival Airport</label>
-                                        <input type="text" class="form-control" id="arrivalAirport" placeholder="Enter Arrival Airport">
+                                        <label asp-for="ArrivalAirport" class="form-label">Arrival Airport</label>
+                                        <input asp-for="ArrivalAirport" type="text" class="form-control" id="arrivalAirport" list="arrivalAirportOptions" oninput="SearchArrivalAirport()" placeholder="Enter Arrival Airport" autocomplete="off">
+                                        <datalist id="arrivalAirportOptions">
+                                        </datalist>
                                     </div>
                                 </div>
                             </div>
@@ -34,13 +38,13 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="startDate" class="form-label">Start Date</label>
+                                        <label asp-for="OutboundFlightDate" class="form-label">Start Date</label>
                                         <input type="date" class="form-control" id="startDate">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3" id="endDateContainer">
-                                        <label for="endDate" class="form-label">End Date</label>
+                                        <label asp-for="ReturnFlightDate" class="form-label">End Date</label>
                                         <input type="date" class="form-control" id="endDate">
                                     </div>
                                 </div>
@@ -56,16 +60,5 @@
     </div>
 </div>
 @section scripts {
-    <script>
-        // Toggle visibility of the "End Date" field based on the selected radio button
-        function IsOneWayOrNot() {
-            var isOneWayRadioButton = $('input[name="IsOneWay"]:checked');
-            var isOneWayValue = isOneWayRadioButton.val();
-            console.log(isOneWayValue);
-            $('#endDateContainer').toggle(isOneWayValue);
-        }
-        $(function () {
-            IsOneWayOrNot();
-        });
-    </script>
+    <script src="~/js/Homepage.js"></script>
 }
