@@ -44,7 +44,7 @@ namespace AircraftReservationSystem.Areas.Admin.Services
             _unitOfWork.Save();
         } 
 
-        public Airport GetAirportById(int id)
+        public Airport? GetAirportById(int id)
         {
             Airport airport = _unitOfWork.Airport.GetFirstOrDefault(x => x.Id == id);
             if (airport != null)

@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using AircraftReservationSystem.Models.ViewModels;
+using AircraftReservationSystem.Areas.Admin.Services;
+using AircraftReservationSystem.Areas.Admin.Services.Interfaces;
 
 namespace AircraftReservationSystem.Areas.Admin.Controllers
 {
@@ -13,15 +16,16 @@ namespace AircraftReservationSystem.Areas.Admin.Controllers
     [Area("Admin")]
     public class UserController : Controller
     {
-		private IUnitOfWork _unitOfWork;
-        public UserController(IUnitOfWork unitOfWork)
+		private readonly IUserService _userService;
+
+        public UserController(IUserService userService)
         {
-            _unitOfWork= unitOfWork;
+            _userService = userService;
         }
 
         public IActionResult Index()
         {
-            var users = _unitOfWork.Passenger.GetAll().ToList();
+			var users = _userService.GetAllPassengers();
             return View(users);
         }
 
@@ -31,59 +35,54 @@ namespace AircraftReservationSystem.Areas.Admin.Controllers
 			{
 				return NotFound();
 			}
-
-			var passenger = _unitOfWork.Passenger.GetFirstOrDefault(x => x.Id == id);
-
-			if (passenger == null)
-			{
-				return NotFound();
-			}
-
-			return View(passenger);
+            PassengerViewModel passengerVM = _userService.GetPassenger(id);
+			
+			return View(passengerVM);
 		}
 
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public IActionResult Edit(Passenger obj)
+		public async Task<IActionResult> EditAsync(PassengerViewModel passengerVM)
 		{
 			// TODO: Edit does not work
 			if (ModelState.IsValid)
 			{
-				_unitOfWork.Passenger.Update(obj);
-				_unitOfWork.Save();
-				return RedirectToAction("Index");
-			}
+                Task<bool> success=_userService.UpdatePassengerAsync(passengerVM);
+                if (success.GetAwaiter().GetResult())
+                {
+                    TempData["UpdateUserSuccessMessage"] = $"User '{passengerVM.Email}' updated successfully.";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["UpdateUserFailMessage"] = $"User '{passengerVM.Email}' updated successfully.";
+                    return View(passengerVM);
+                }
+            }
 			TempData["error"] = "Failed to update user. Modelstate is invalid.";
-			return View(obj);
+			return View(passengerVM);
 		}
-		// GET: Admin/User/Delete/5
-		public IActionResult Delete(string? id)
-		{
-			if (string.IsNullOrEmpty(id))
-			{
-				return NotFound();
-			}
+        public IActionResult DeleteConfirmed(string id)
+        {
+            var user = _userService.GetPassengerById(id);
 
-			var user = _unitOfWork.Passenger.GetFirstOrDefault(u=>u.Id==id);
+            if (user == null)
+            {
+                return NotFound();
+            }
 
-			if (user == null)
-			{
-				return NotFound();
-			}
+            Task<bool> success=_userService.DeleteUser(user);
+            if (success.GetAwaiter().GetResult())
+            {
+                TempData["DeleteUserSuccessMessage"] = $"User: '{user.UserName}' deleted successfully.";
+            }
+            else
+            {
+                TempData["DeleteUserFailMessage"] = $"User: '{user.UserName}' delete failed.";
+            }
+            return RedirectToAction("Index");
 
-			return View(user);
-		}
-
-
-		// POST: Admin/User/Delete/5
-		[HttpPost, ActionName("Delete")]
-		[ValidateAntiForgeryToken]
-		public IActionResult DeleteConfirmed(Passenger obj)
-		{ 
-			_unitOfWork.Passenger.Delete(obj);
-			_unitOfWork.Save();
-			return RedirectToAction("Index");
-		}
-	}
+        }
+    }
 }

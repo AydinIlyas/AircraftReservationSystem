@@ -6,23 +6,7 @@
 
 
 <div class="container p-3">
-    @if (TempData["DeleteSuccessMessage"] != null)
-    {
-        <div class="alert alert-success">
-            @TempData["DeleteSuccessMessage"]
-        </div>
-    }
-    @if (TempData["UpdatedSuccessMessage"] != null)
-    {
-        <div class="alert alert-success">
-            @TempData["UpdatedSuccessMessage"]
-        </div>
-    }
-    @if (TempData["FailedUpdateMessage"] != null)
-    {
-        <div class="alert alert-danger"> @TempData["FailedUpdateMessage"] </div>
-    }
-
+    <h1>Airport Management</h1>
     <div class="row pt-4">
         <div class="col-6">
             <h2 class="text-dark">Airport List</h2>
@@ -97,5 +81,5 @@
     </table>
 </div>
 @section scripts {
-    <script src="~/js/AirportList.js"></script>
+    <script src="~/js/DeleteModal.js"></script>
 }

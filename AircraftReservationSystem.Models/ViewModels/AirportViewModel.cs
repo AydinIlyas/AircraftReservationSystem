@@ -24,13 +24,13 @@ namespace AircraftReservationSystem.Models.ViewModels
 
         public string AirportCode { get; set; }
 
-        public ICollection<Flight> Departures { get; set; }
+        public ICollection<Flight>? Departures { get; set; }
 
-        public ICollection<Flight> Arrivals { get; set; }
+        public ICollection<Flight>? Arrivals { get; set; }
 
         public int DistrictId { get; set; }
 
-        public District District { get; set; }
+        public District? District { get; set; }
 
         public int CountryId { get; set; }
 
@@ -43,8 +43,8 @@ namespace AircraftReservationSystem.Models.ViewModels
                 Id = Id,
                 Name = Name,
                 AirportCode = AirportCode,
-                Departures = Departures,
-                Arrivals = Arrivals,
+                Departures = Departures ?? null,
+                Arrivals = Arrivals??null,
                 DistrictId = DistrictId,
                 District = District,
             };

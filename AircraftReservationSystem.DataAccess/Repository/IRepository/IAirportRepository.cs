@@ -9,5 +9,6 @@ namespace AircraftReservationSystem.DataAccess.Repository.IRepository
 {
     public interface IAirportRepository:IRepository<Airport>
     {
+        Task<IEnumerable<Airport>> GetAllAsync();
     }
 }

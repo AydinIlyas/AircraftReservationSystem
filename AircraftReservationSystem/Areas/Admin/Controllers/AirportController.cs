@@ -12,16 +12,16 @@ namespace AircraftReservationSystem.Areas.Admin.Controllers
     [Area("Admin")]
     public class AirportController : Controller
     {
-        private readonly IAirportService airportService;
+        private readonly IAirportService _airportService;
         public AirportController(IAirportService airportService)
         {
-            this.airportService = airportService;
+            _airportService = airportService;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            var airports = airportService.GetAirports();
+            var airports = _airportService.GetAirports();
             return View("AirportList", airports);
         }
 
@@ -34,7 +34,8 @@ namespace AircraftReservationSystem.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddAirport(AirportViewModel airportViewModel)
         {
-            airportService.CreateAirport(airportViewModel);
+            _airportService.CreateAirport(airportViewModel);
+            TempData["CreatedAirportSuccessfully"]= $"Created {airportViewModel?.Airport?.Name} successfully";
             return RedirectToAction(nameof(Index));
         }
 
@@ -45,7 +46,7 @@ namespace AircraftReservationSystem.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            Airport airport = airportService.GetAirportById((int)id);
+            Airport airport = _airportService.GetAirportById((int)id);
 
             if (airport == null)
             {
@@ -63,16 +64,16 @@ namespace AircraftReservationSystem.Areas.Admin.Controllers
 
         public IActionResult DeleteConfirmed(int id)
         {
-            var airport = airportService.GetAirportById(id);
+            var airport = _airportService.GetAirportById(id);
 
             if (airport == null)
             {
                 return NotFound();
             }
 
-            airportService.DeleteAirport(airport);
+            _airportService.DeleteAirport(airport);
 
-            TempData["DeleteSuccessMessage"] = $"Airport '{airport.Name}' deleted successfully.";
+            TempData["DeleteAirportSuccessMessage"] = $"Airport '{airport.Name}' deleted successfully.";
 
             return RedirectToAction("Index");
         }
@@ -85,16 +86,16 @@ namespace AircraftReservationSystem.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            if (airport.Id != null)
+            if (airport.Id != null&&ModelState.IsValid)
             {
 
-                airportService.UpdateAirport(airport.ToAirport());
+                _airportService.UpdateAirport(airport.ToAirport());
 
-                TempData["UpdatedSuccessMessage"] = $"Airport '{airport.Name}' updated successfully.";
+                TempData["UpdatedAirportSuccessMessage"] = $"Airport '{airport.Name}' updated successfully.";
 
                 return RedirectToAction("Index");
             }
-            TempData["FailedUpdateMessage"] = $"An error occurred while updating the airport '{airport.Name}'.";
+            TempData["FailedAirportUpdateMessage"] = $"An error occurred while updating the airport '{airport.Name}'.";
             return RedirectToAction("Index");
 
         }

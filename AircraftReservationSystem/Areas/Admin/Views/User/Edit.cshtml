@@ -1,4 +1,4 @@
-﻿@model Passenger
+﻿@model AircraftReservationSystem.Models.ViewModels.PassengerViewModel
 
 <form method="post" asp-action="Edit">
 	<div class="border p-3 mt-4">
@@ -22,15 +22,7 @@
 			<input asp-for="Email" class="form-control" />
 			<span asp-validation-for="Email" class="text-danger"></span>
 		</div>
-		@* <div class="mb-3">
-			<label asp-for="PassportNumber"></label>
-			<input asp-for="PassportNumber" class="form-control" />
-			<span asp-validation-for="PassportNumber" class="text-danger"></span>
-		</div> *@
-		<input type="hidden" asp-for="PassportNumber"/>
-		<input type="hidden" asp-for="BirthDate"/>
-		<input type="hidden" asp-for="SoldTickets"/>
-		<input type="hidden" asp-for="UserName"/>
+
 		<button type="submit" class="btn btn-primary" style="width:150px">Update</button>
 		<a asp-controller="User" asp-action="Index" class="btn btn-secondary" style="width:150px">	
 			Back to List

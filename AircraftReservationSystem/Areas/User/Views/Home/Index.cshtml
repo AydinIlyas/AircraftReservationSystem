@@ -1,9 +1,8 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model AircraftReservationSystem.Models.ViewModels.SearchFlight
 <head>
     <link rel="stylesheet" href="~/css/homepage.css" asp-append-version="true" />
 </head>
+
 <div class="homepage">
     <div class="container mt-5">
         <div class="row justify-content-center" id="cardContainer">
@@ -14,6 +13,10 @@
 
                         <form>
                             <div class="row">
+                                <div>
+                                    <input type="radio" asp-for="IsOneWay" value="true" onchange="IsOneWayOrNot()"> <span>One way</span>
+                                    <input type="radio" asp-for="IsOneWay" value="false" onchange="IsOneWayOrNot()"> <span>Round trip</span>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="departureAirport" class="form-label">Departure Airport</label>
@@ -36,7 +39,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="mb-3">
+                                    <div class="mb-3" id="endDateContainer">
                                         <label for="endDate" class="form-label">End Date</label>
                                         <input type="date" class="form-control" id="endDate">
                                     </div>
@@ -52,3 +55,17 @@
         </div>
     </div>
 </div>
+@section scripts {
+    <script>
+        // Toggle visibility of the "End Date" field based on the selected radio button
+        function IsOneWayOrNot() {
+            var isOneWayRadioButton = $('input[name="IsOneWay"]:checked');
+            var isOneWayValue = isOneWayRadioButton.val();
+            console.log(isOneWayValue);
+            $('#endDateContainer').toggle(isOneWayValue);
+        }
+        $(function () {
+            IsOneWayOrNot();
+        });
+    </script>
+}

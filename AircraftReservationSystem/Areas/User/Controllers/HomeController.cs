@@ -1,4 +1,5 @@
 ﻿using AircraftReservationSystem.Models;
+using AircraftReservationSystem.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -16,7 +17,8 @@ namespace AircraftReservationSystem.Areas.User.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            SearchFlight searchFlight = new SearchFlight();
+            return View(searchFlight);
         }
 
         public IActionResult Privacy()

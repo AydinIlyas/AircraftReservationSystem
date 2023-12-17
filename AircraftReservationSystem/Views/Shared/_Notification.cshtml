@@ -1,0 +1,71 @@
+﻿@* User Notifications *@
+@if (TempData["UpdateUserSuccessMessage"] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr.success('@TempData["UpdateUserSuccessMessage"]');
+    </script>
+}
+@if (TempData["UpdateUserFailMessage"] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr.error('@TempData["UpdateUserFailMessage"]');
+    </script>
+}
+@if (TempData["DeleteUserSuccessMessage"]!=null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr.success('@TempData["DeleteUserSuccessMessage"]');
+    </script>
+} 
+
+@if (TempData["DeleteUserFailMessage"] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr.success('@TempData["DeleteUserFailMessage"]');
+    </script>
+} 
+
+
+
+@* Airport Notifications *@
+
+@if (TempData["CreatedAirportSuccessfully"] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr.success('@TempData["CreatedAirportSuccessfully"]');
+    </script>
+}
+@if (TempData["DeleteAirportSuccessMessage"] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr.success('@TempData["DeleteAirportSuccessMessage"]');
+    </script>
+}
+@if (TempData["UpdatedAirportSuccessMessage"] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr.success('@TempData["UpdatedAirportSuccessMessage"]');
+    </script>
+}
+@if (TempData["FailedAirportUpdateMessage"] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr.error('@TempData["FailedAirportUpdateMessage"]');
+    </script>
+}
