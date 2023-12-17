@@ -85,5 +85,15 @@ namespace AircraftReservationSystem.DataAccess.Repository
         {
             dbSet.RemoveRange(entity);
         }
+        public void Update(T entity)
+        {
+            if (_db.Entry(entity).State == EntityState.Detached)
+            {
+                _db.Set<T>().Attach(entity);
+            }
+
+            _db.Entry(entity).State = EntityState.Modified;
+        }
+
     }
 }

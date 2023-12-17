@@ -32,15 +32,21 @@ namespace AircraftReservationSystem.Areas.Admin.Services
             _unitOfWork.Airport.Add(airport);
             _unitOfWork.Save();
         }
+        public void UpdateAirport(Airport airport)
+        {
+            Airport existingAirport = GetAirportById(airport.Id);
 
-		public void UpdateAirport(Airport airportViewModel)
-		{
-			throw new NotImplementedException();
-		}
+            existingAirport.Name = airport.Name;
+            existingAirport.AirportCode = airport.AirportCode;
+            existingAirport.DistrictId = (int)airport.DistrictId;
 
-		public Airport GetAirportById(int id)
-		{
-           Airport airport= _unitOfWork.Airport.GetFirstOrDefault(x => x.Id == id);
+            _unitOfWork.Airport.Update(existingAirport);
+            _unitOfWork.Save();
+        } 
+
+        public Airport GetAirportById(int id)
+        {
+            Airport airport = _unitOfWork.Airport.GetFirstOrDefault(x => x.Id == id);
             if (airport != null)
             {
                 return airport;
@@ -50,12 +56,14 @@ namespace AircraftReservationSystem.Areas.Admin.Services
                 _logger.LogWarning("Airport not found! Id: " + id);
                 return null;
             }
-		}
+        }
 
         public void DeleteAirport(Airport airport)
         {
             _unitOfWork.Airport.Remove(airport);
             _unitOfWork.Save();
         }
+
+
     }
 }

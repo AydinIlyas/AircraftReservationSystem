@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AircraftReservationSystem.Areas.Admin.Controllers
 {
-    [Authorize(Roles =ROLES.Role_Admin)]
+    [Authorize(Roles = ROLES.Role_Admin)]
     [Area("Admin")]
     public class AirportController : Controller
     {
@@ -21,13 +21,14 @@ namespace AircraftReservationSystem.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var airports=airportService.GetAirports();
-            return View("AirportList",airports);
+            var airports = airportService.GetAirports();
+            return View("AirportList", airports);
         }
 
-        public IActionResult AddAirport() {
+        public IActionResult AddAirport()
+        {
             var viewModel = new AirportViewModel();
-            return View("AddAirport",viewModel);
+            return View("AddAirport", viewModel);
         }
 
         [HttpPost]
@@ -39,25 +40,25 @@ namespace AircraftReservationSystem.Areas.Admin.Controllers
 
         public IActionResult EditAirport(int? id)
         {
-			if (id==null)
-			{
-				return NotFound();
-			}
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-            Airport airport= airportService.GetAirportById((int)id);
+            Airport airport = airportService.GetAirportById((int)id);
 
-			if (airport == null)
-			{
-				return NotFound();
-			}
+            if (airport == null)
+            {
+                return NotFound();
+            }
             AirportViewModel viewModel = new AirportViewModel
             {
                 Airport = airport,
-                DistrictId = id
+                DistrictId = airport.DistrictId
             };
 
-			return View("EditAirport",viewModel);
-		}
+            return View("EditAirport", viewModel);
+        }
 
 
         public IActionResult DeleteConfirmed(int id)
@@ -71,13 +72,33 @@ namespace AircraftReservationSystem.Areas.Admin.Controllers
 
             airportService.DeleteAirport(airport);
 
-            var updatedAirports = airportService.GetAirports().Where(a => a.Id != id);
-
             TempData["DeleteSuccessMessage"] = $"Airport '{airport.Name}' deleted successfully.";
-
 
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public IActionResult UpdateAirport(AirportViewModel airport)
+        {
+            if (airport == null)
+            {
+                return NotFound();
+            }
+
+            if (airport.Id != null)
+            {
+
+                airportService.UpdateAirport(airport.ToAirport());
+
+                TempData["UpdatedSuccessMessage"] = $"Airport '{airport.Name}' updated successfully.";
+
+                return RedirectToAction("Index");
+            }
+            TempData["FailedUpdateMessage"] = $"An error occurred while updating the airport '{airport.Name}'.";
+            return RedirectToAction("Index");
+
+        }
+
 
 
 

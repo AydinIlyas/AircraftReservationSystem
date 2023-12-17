@@ -60,7 +60,7 @@ namespace AircraftReservationSystem.DataAccess.Repository
 
         public ISoldTicketRepository SoldTicket { get; private set; }
 
-        public void Save()
+        public void Save()  
         {
             _db.SaveChanges();
         }

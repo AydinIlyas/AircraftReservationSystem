@@ -39,8 +39,8 @@ namespace AircraftReservationSystem.Models
 
         public ICollection<Flight> Arrivals { get; set; }
 
-        public District District { get; set; }
         public int DistrictId { get; set; }
+        public District District { get; set; }
 
 
 

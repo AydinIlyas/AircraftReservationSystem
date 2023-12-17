@@ -12,6 +12,17 @@
             @TempData["DeleteSuccessMessage"]
         </div>
     }
+    @if (TempData["UpdatedSuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["UpdatedSuccessMessage"]
+        </div>
+    }
+    @if (TempData["FailedUpdateMessage"] != null)
+    {
+        <div class="alert alert-danger"> @TempData["FailedUpdateMessage"] </div>
+    }
+
     <div class="row pt-4">
         <div class="col-6">
             <h2 class="text-dark">Airport List</h2>

@@ -22,3 +22,10 @@ html {
 
 
 
+
+.button-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around !important;
+    margin-top: 1vh;
+}
