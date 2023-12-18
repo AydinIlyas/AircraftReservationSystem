@@ -11,10 +11,16 @@ using AircraftReservationSystem.Models;
 using AircraftReservationSystem.DataAccess.DbInitializer;
 using AircraftReservationSystem.Areas.AirlineUser.Services.Interfaces;
 using AircraftReservationSystem.Areas.AirlineUser.Services;
+using Microsoft.Extensions.DependencyInjection;
+using AircraftReservationSystem.Mapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
+
+
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
@@ -33,7 +39,10 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IAirportService, AirportService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IFlightService, FlightService>();
+builder.Services.AddScoped<IAircraftService, AircraftService>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
