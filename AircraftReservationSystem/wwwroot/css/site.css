@@ -1,13 +1,7 @@
-html {
-    position: relative;
-    min-height:100%;
-    font-size: 14px;
-}
-
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .nav-item-hover {
@@ -19,13 +13,26 @@ html {
         border-bottom-color: #fff;
     }
 
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
 
-
-
+body {
+    display:flex;
+    flex-direction:column;
+}
 
 .button-group {
     display: flex;
     flex-direction: row;
     justify-content: space-around !important;
     margin-top: 1vh;
+}
+
+#mainContainer {
+    display:flex;
+    flex-direction:column;
+    flex: 1;
 }
