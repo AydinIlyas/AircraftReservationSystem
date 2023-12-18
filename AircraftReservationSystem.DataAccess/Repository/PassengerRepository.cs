@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AircraftReservationSystem.DataAccess.Repository
 {
-    public class PassengerRepository:Repository<Passenger>,IPassengerRepository
+    public class PassengerRepository:Repository<ApplicationUser>,IPassengerRepository
     {
         private ApplicationDbContext _db;
 

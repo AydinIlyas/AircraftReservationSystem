@@ -14,7 +14,7 @@ namespace AircraftReservationSystem.Models
         {
         }
 
-        public SoldTicket(int id, string seatNumber, float totalPrice, PaymentInformation? paymentInformation, Passenger passenger, string passengerId, FlightClass flightClass, int flightClassId, FlightTicket? flightTicket)
+        public SoldTicket(int id, string seatNumber, float totalPrice, PaymentInformation? paymentInformation, ApplicationUser passenger, string passengerId, FlightClass flightClass, int flightClassId, FlightTicket? flightTicket)
         {
             Id = id;
             SeatNumber = seatNumber;
@@ -38,7 +38,7 @@ namespace AircraftReservationSystem.Models
 
         public PaymentInformation? PaymentInformation { get; set; }
         [ForeignKey("PassengerId")]
-        public Passenger? Passenger { get; set; }
+        public ApplicationUser? Passenger { get; set; }
         public string? PassengerId { get; set; }
         [ForeignKey("FlightClassId")]
         public FlightClass FlightClass { get; set; }

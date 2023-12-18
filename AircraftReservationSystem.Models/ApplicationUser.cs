@@ -9,19 +9,20 @@ using System.Threading.Tasks;
 
 namespace AircraftReservationSystem.Models
 {
-    public class Passenger : IdentityUser
+    public class ApplicationUser : IdentityUser
     {
-        public Passenger()
+        public ApplicationUser()
         {
         }
 
-        public Passenger(string firstname, string lastname, string passportNumber, DateTime birthDate, ICollection<SoldTicket> soldTicket)
+        public ApplicationUser(string firstname, string lastname, string passportNumber, DateTime birthDate, string? airlineName, ICollection<SoldTicket>? soldTickets)
         {
             Firstname = firstname;
             Lastname = lastname;
             PassportNumber = passportNumber;
             BirthDate = birthDate;
-            SoldTickets = soldTicket;
+            AirlineName = airlineName;
+            SoldTickets = soldTickets;
         }
 
         [Required]
@@ -37,6 +38,7 @@ namespace AircraftReservationSystem.Models
         [Required]
         public DateTime BirthDate { get; set; }
 
+        public string? AirlineName {  get; set; }
 		public ICollection<SoldTicket>? SoldTickets { get; set; }
 
     }

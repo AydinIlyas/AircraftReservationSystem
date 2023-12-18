@@ -9,47 +9,57 @@ namespace AircraftReservationSystem.Areas.Admin.Services
     public class UserService:IUserService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly UserManager<Passenger> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<AirportService> _logger;
 
-        public UserService(IUnitOfWork unitOfWork, UserManager<Passenger> userManager, ILogger<AirportService> logger)
+        public UserService(IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager, ILogger<AirportService> logger)
         {
             _unitOfWork = unitOfWork;
             _userManager = userManager;
             _logger = logger;
         }
 
-        public async Task<bool> DeleteUser(Passenger user)
+        public async Task<bool> DeleteUser(ApplicationUser user)
         {
             var result = await _userManager.DeleteAsync(user);
             return result.Succeeded;
         }
 
-        public List<Passenger> GetAllPassengers()
+        public List<ApplicationUserViewModel> GetAllPassengers()
         {
-            return _unitOfWork.Passenger.GetAll().ToList();
+            var passengers=_unitOfWork.Passenger.GetAll().ToList();
+            var applicationUserVMs = passengers.Select(passenger => new ApplicationUserViewModel
+            {
+                Id=passenger.Id,
+                Firstname = passenger.Firstname,
+                Lastname = passenger.Lastname,
+                Email = passenger.Email,
+                Role = _userManager.GetRolesAsync(passenger).Result.ToList()[0],
+                // Other properties as needed in your view model
+            }).ToList();
+            return applicationUserVMs;
         }
 
-        public PassengerViewModel? GetPassenger(string id)
+        public ApplicationUserViewModel? GetPassenger(string id)
         {
-            Passenger passenger = _unitOfWork.Passenger.GetFirstOrDefault(x => x.Id == id);
+            ApplicationUser passenger = _unitOfWork.Passenger.GetFirstOrDefault(x => x.Id == id);
 
             if (passenger == null)
             {
                 return null;
             }
-            PassengerViewModel passengerVM = new PassengerViewModel
+            ApplicationUserViewModel passengerVM = new ApplicationUserViewModel
             {
                 Firstname = passenger.Firstname,
                 Lastname = passenger.Lastname,
-                Email = passenger.Email,
+                Email = passenger.Email
             };
             return passengerVM;
         }
 
-        public Passenger? GetPassengerById(string id)
+        public ApplicationUser? GetPassengerById(string id)
         {
-            Passenger passenger= _unitOfWork.Passenger.GetFirstOrDefault(x => x.Id.Equals(id));
+            ApplicationUser passenger= _unitOfWork.Passenger.GetFirstOrDefault(x => x.Id.Equals(id));
             if(passenger==null)
             {
                 _logger.LogWarning("User not found! User Id: {Id}", id);
@@ -58,9 +68,9 @@ namespace AircraftReservationSystem.Areas.Admin.Services
             return passenger;
         }
 
-        public async Task<bool> UpdatePassengerAsync(PassengerViewModel passengerVM)
+        public async Task<bool> UpdatePassengerAsync(ApplicationUserViewModel passengerVM)
         {
-            Passenger passenger = _unitOfWork.Passenger.GetFirstOrDefault(x => x.Id == passengerVM.Id);
+            ApplicationUser passenger = _unitOfWork.Passenger.GetFirstOrDefault(x => x.Id == passengerVM.Id);
             passenger.Firstname = passengerVM.Firstname;
             passenger.Lastname = passengerVM.Lastname;
             passenger.Email = passengerVM.Email;

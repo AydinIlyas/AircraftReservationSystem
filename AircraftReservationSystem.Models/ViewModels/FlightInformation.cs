@@ -4,13 +4,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AircraftReservationSystem.Models.ViewModels
 {
-    public class FlightVM
+    public class FlightInformation
     {
-        public FlightVM()
+        public FlightInformation()
         {
         }
 
-        public FlightVM(int id,string flightNumber, DateTime departureDate, DateTime arrivalDate, int duration, float price, float businessPrice, Aircraft aircraft, int airCraftId, Airport departureAirport, int departureAirportId, Airport arrivalAirport, int arrivalAirportId)
+        public FlightInformation(int id,string flightNumber, DateTime departureDate, DateTime arrivalDate, int duration, float price, float businessPrice, Aircraft aircraft, int airCraftId, Airport departureAirport, int departureAirportId, Airport arrivalAirport, int arrivalAirportId)
         {
             Id = id;
             FlightNumber = flightNumber;
@@ -45,5 +45,25 @@ namespace AircraftReservationSystem.Models.ViewModels
         public int DepartureAirportId { get; set; }
         public Airport ArrivalAirport { get; set; }
         public int ArrivalAirportId { get; set; }
+
+        public Flight toFlight()
+        {
+            return new Flight
+            {
+                Id = this.Id,
+                FlightNumber = this.FlightNumber,
+                DepartureAirport = this.DepartureAirport,
+                ArrivalAirport = this.ArrivalAirport,
+                Duration = this.Duration,
+                Price = this.Price,
+                BusinessPrice = this.BusinessPrice,
+                Aircraft = this.Aircraft,
+                AirCraftId = this.AirCraftId,
+                DepartureAirportId = this.DepartureAirportId,
+                DepartureDate = this.DepartureDate,
+                ArrivalAirportId = this.ArrivalAirportId,
+                ArrivalDate = this.ArrivalDate,
+            };
+        }
     }
 }

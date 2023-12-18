@@ -5,11 +5,12 @@ using AircraftReservationSystem.Utility;
 using AircraftReservationSystem.DataAccess.Data;
 using AircraftReservationSystem.DataAccess.Repository.IRepository;
 using AircraftReservationSystem.DataAccess.Repository;
-using AircraftReservationSystem.Areas.User.Services;
 using AircraftReservationSystem.Areas.Admin.Services;
 using AircraftReservationSystem.Areas.Admin.Services.Interfaces;
 using AircraftReservationSystem.Models;
 using AircraftReservationSystem.DataAccess.DbInitializer;
+using AircraftReservationSystem.Areas.AirlineUser.Services.Interfaces;
+using AircraftReservationSystem.Areas.AirlineUser.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 
-builder.Services.AddIdentity<Passenger,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+builder.Services.AddIdentity<ApplicationUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -29,9 +30,9 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IFlightService, FlightService>();
 builder.Services.AddScoped<IAirportService, AirportService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IFlightService, FlightService>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 var app = builder.Build();
 

@@ -1,0 +1,109 @@
+﻿@model List<AircraftReservationSystem.Models.ViewModels.FlightInformation>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <h1>Flight Management</h1>
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-dark">Flight List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Flight" asp-action="AddFlight" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i>&nbsp; Add New Flight
+            </a>
+        </div>
+    </div>
+
+    <br /><br />
+
+    <table class="table table-bordered table-striped" width="100%">
+        <thead>
+            <tr>
+                <th width="10%">
+                    FlightNumber
+                </th>
+                <th width="10%">
+                    Departure Airport
+                </th>
+                <th width="10%">
+                    Arrival Airport
+                </th>
+                <th width="10%">
+                    Departure Date
+                </th>
+                <th width="10%">
+                    Arrival Date
+                </th>
+                <th width="10%">
+                    Duration
+                </th>
+                <th width="10%">
+                    Aircraft
+                </th>
+                <th width="10%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td>
+                        @obj.FlightNumber
+                    </td>
+                    <td>
+                        @obj.DepartureAirport.Name
+                    </td>
+                    <td>
+                        @obj.ArrivalAirport.Name
+                    </td>
+                    <td>
+                        @obj.DepartureDate
+                    </td>
+                    <td>
+                        @obj.ArrivalDate
+                    </td>
+                    <td>
+                        @obj.Duration
+                    </td>
+                    <td>
+                        @obj.Aircraft
+                    </td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a asp-controller="Flight" asp-action="Edit" asp-route-id="@obj.Id"
+                               class="btn btn-primary"> <i class="bi bi-pencil-square"></i> Edit</a>
+                            <a class="btn btn-danger" data-item-id="@obj.Id"> <i class="bi bi-trash-fill"></i> Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmation</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete the item with the name '@obj.FlightNumber'?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Give up</button>
+                                <a asp-controller="User" asp-action="DeleteConfirmed" asp-route-id="@obj.Id" class="btn btn-danger" id="confirmDelete">Confirm</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </tbody>
+
+    </table>
+</div>
+
+@section scripts {
+    <script src="~/js/DeleteModal.js"></script>
+}

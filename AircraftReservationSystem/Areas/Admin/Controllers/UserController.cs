@@ -35,7 +35,7 @@ namespace AircraftReservationSystem.Areas.Admin.Controllers
 			{
 				return NotFound();
 			}
-            PassengerViewModel passengerVM = _userService.GetPassenger(id);
+            ApplicationUserViewModel passengerVM = _userService.GetPassenger(id);
 			
 			return View(passengerVM);
 		}
@@ -43,7 +43,7 @@ namespace AircraftReservationSystem.Areas.Admin.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> EditAsync(PassengerViewModel passengerVM)
+		public async Task<IActionResult> EditAsync(ApplicationUserViewModel passengerVM)
 		{
 			// TODO: Edit does not work
 			if (ModelState.IsValid)

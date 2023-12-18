@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace AircraftReservationSystem.DataAccess.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<Passenger>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
         {
@@ -32,7 +32,7 @@ namespace AircraftReservationSystem.DataAccess.Data
         public DbSet<District> Districts { get; set; }
         public DbSet<Flight> Flights { get; set; }
         public DbSet<FlightTicket> FlightTickets { get; set; }
-        public DbSet<Passenger> Passengers { get; set; }
+        public DbSet<ApplicationUser> Passengers { get; set; }
         public DbSet<PaymentInformation> PaymentInformation { get; set; }
         public DbSet<PaymentType> PaymentTypes { get; set; }
         public DbSet<SoldTicket> SoldTickets { get; set; }
@@ -53,7 +53,7 @@ namespace AircraftReservationSystem.DataAccess.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Passenger>()
+            modelBuilder.Entity<ApplicationUser>()
                 .HasMany(s => s.SoldTickets)
                 .WithOne(st => st.Passenger)
                 .HasForeignKey(st=>st.PassengerId)

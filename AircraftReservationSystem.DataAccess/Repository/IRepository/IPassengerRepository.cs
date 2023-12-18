@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AircraftReservationSystem.DataAccess.Repository.IRepository
 {
-    public interface IPassengerRepository:IRepository<Passenger>
+    public interface IPassengerRepository:IRepository<ApplicationUser>
     {
 	}
 }

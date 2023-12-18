@@ -23,4 +23,8 @@
     <ProjectReference Include="..\AircraftReservationSystem.WebApi\AircraftReservationSystem.WebApi.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\User\Services\" />
+  </ItemGroup>
+
 </Project>

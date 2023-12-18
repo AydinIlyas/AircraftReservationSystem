@@ -13,12 +13,12 @@ namespace AircraftReservationSystem.DataAccess.DbInitializer
 {
     public class DbInitializer : IDbInitializer
     {
-        private readonly UserManager<Passenger> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ApplicationDbContext _db;
 
         public DbInitializer(
-            UserManager<Passenger> userManager,
+            UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
             ApplicationDbContext db)
         {
@@ -58,6 +58,7 @@ namespace AircraftReservationSystem.DataAccess.DbInitializer
             if (!_roleManager.RoleExistsAsync(ROLES.Role_Admin).GetAwaiter().GetResult())
             {
                 _roleManager.CreateAsync(new IdentityRole(ROLES.Role_Admin)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(ROLES.Role_Airline_User)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(ROLES.Role_User)).GetAwaiter().GetResult();
             }
             var adminUser = _userManager.FindByEmailAsync("admin@gmail.com").GetAwaiter().GetResult();
@@ -65,7 +66,7 @@ namespace AircraftReservationSystem.DataAccess.DbInitializer
             {
                 //if roles are not created, then we will create admin user as well
 
-                _userManager.CreateAsync(new Passenger
+                _userManager.CreateAsync(new ApplicationUser
                 {
                     UserName = "admin@gmail.com",
                     Email = "admin@gmail.com",
@@ -75,7 +76,7 @@ namespace AircraftReservationSystem.DataAccess.DbInitializer
                     BirthDate = DateTime.Now,
                     SoldTickets = null
                 }, "Admin123*").GetAwaiter().GetResult();
-                _userManager.CreateAsync(new Passenger
+                _userManager.CreateAsync(new ApplicationUser
                 {
                     UserName = "user@gmail.com",
                     Email = "user@gmail.com",
@@ -85,12 +86,24 @@ namespace AircraftReservationSystem.DataAccess.DbInitializer
                     BirthDate = DateTime.Now,
                     SoldTickets = null
                 }, "User123*").GetAwaiter().GetResult();
+                _userManager.CreateAsync(new ApplicationUser
+                {
+                    UserName = "airlineuser@gmail.com",
+                    Email = "airlineuser@gmail.com",
+                    Firstname = "airlineUser",
+                    Lastname = "airlineUser",
+                    PassportNumber = "12345678910",
+                    BirthDate = DateTime.Now,
+                    SoldTickets = null
+                }, "AirlineUser123*").GetAwaiter().GetResult();
 
-                Passenger admin = _db.Passengers.FirstOrDefault(u => u.Email == "admin@gmail.com");
-                Passenger user = _db.Passengers.FirstOrDefault(u => u.Email == "user@gmail.com");
+                ApplicationUser admin = _db.Passengers.FirstOrDefault(u => u.Email == "admin@gmail.com");
+                ApplicationUser user = _db.Passengers.FirstOrDefault(u => u.Email == "user@gmail.com");
+                ApplicationUser airlineUser = _db.Passengers.FirstOrDefault(u => u.Email == "airlineuser@gmail.com");
 
                 _userManager.AddToRoleAsync(admin, ROLES.Role_Admin).GetAwaiter().GetResult();
                 _userManager.AddToRoleAsync(user, ROLES.Role_User).GetAwaiter().GetResult();
+                _userManager.AddToRoleAsync(airlineUser, ROLES.Role_Airline_User).GetAwaiter().GetResult();
             }
 
             return;

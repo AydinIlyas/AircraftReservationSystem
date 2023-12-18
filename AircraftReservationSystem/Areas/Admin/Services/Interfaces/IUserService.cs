@@ -5,10 +5,10 @@ namespace AircraftReservationSystem.Areas.Admin.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<bool> DeleteUser(Passenger user);
-        List<Passenger> GetAllPassengers();
-        PassengerViewModel? GetPassenger(string id);
-        Passenger? GetPassengerById(string id);
-        Task<bool> UpdatePassengerAsync(PassengerViewModel passengerVM);
+        Task<bool> DeleteUser(ApplicationUser user);
+        List<ApplicationUserViewModel> GetAllPassengers();
+        ApplicationUserViewModel? GetPassenger(string id);
+        ApplicationUser? GetPassengerById(string id);
+        Task<bool> UpdatePassengerAsync(ApplicationUserViewModel passengerVM);
     }
 }
