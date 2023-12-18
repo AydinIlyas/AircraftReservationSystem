@@ -1,7 +1,7 @@
 ﻿function IsOneWayOrNot() {
     var isOneWayRadioButton = $('input[name="IsOneWay"]:checked');
     var isOneWayValue = isOneWayRadioButton.val();
-    $('#endDateContainer').toggle(isOneWayValue);
+    $('#endDateContainer').toggle(isOneWayValue==="false");
 }
 function SearchDepartureAirport() {
     var userInput = $('#departureAirport').val();
@@ -27,6 +27,3 @@ function SearchArrivalAirport() {
         });
     }
 }
-$(function () {
-    IsOneWayOrNot();
-});

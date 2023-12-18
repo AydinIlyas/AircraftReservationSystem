@@ -24,7 +24,7 @@ builder.Services.AddIdentity<Passenger,IdentityRole>(options => options.SignIn.R
     .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
 });
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();

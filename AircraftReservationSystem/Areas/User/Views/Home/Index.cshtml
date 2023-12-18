@@ -14,7 +14,7 @@
                         <form>
                             <div class="row">
                                 <div>
-                                    <input type="radio" asp-for="IsOneWay" value="true" onchange="IsOneWayOrNot()"> <span>One way</span>
+                                    <input type="radio" asp-for="IsOneWay" value="true" onchange="IsOneWayOrNot()" checked> <span>One way</span>
                                     <input type="radio" asp-for="IsOneWay" value="false" onchange="IsOneWayOrNot()"> <span>Round trip</span>
                                 </div>
                                 <div class="col-md-6">
@@ -43,7 +43,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="mb-3" id="endDateContainer">
+                                    <div class="mb-3" id="endDateContainer" style="display:none;">
                                         <label asp-for="ReturnFlightDate" class="form-label">End Date</label>
                                         <input type="date" class="form-control" id="endDate">
                                     </div>
@@ -60,5 +60,6 @@
     </div>
 </div>
 @section scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="~/js/Homepage.js"></script>
 }
