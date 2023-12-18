@@ -27,7 +27,6 @@ namespace AircraftReservationSystem.Areas.Identity.Pages.Account
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<Passenger> _signInManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<Passenger> _userManager;
         private readonly IUserStore<Passenger> _userStore;
         private readonly IUserEmailStore<Passenger> _emailStore;
@@ -43,7 +42,6 @@ namespace AircraftReservationSystem.Areas.Identity.Pages.Account
             IEmailSender emailSender)
         {
             _userManager = userManager;
-            _roleManager = roleManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
@@ -114,14 +112,11 @@ namespace AircraftReservationSystem.Areas.Identity.Pages.Account
             public string? PhoneNumber { get; set; }
 
             public DateTime? BirthDate { get; set; }
-            public IEnumerable<SelectListItem> RoleList {  get; set; } 
         }
 
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            Input = new() { RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem { Text = i, Value = i }) }; 
-                ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
@@ -141,18 +136,11 @@ namespace AircraftReservationSystem.Areas.Identity.Pages.Account
                 user.PassportNumber= Input.PassportNumber;
                 user.BirthDate = (DateTime)Input.BirthDate;
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                await _userManager.AddToRoleAsync(user, ROLES.Role_User);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    if(!String.IsNullOrEmpty(Input.Role))
-                    {
-                        await _userManager.AddToRoleAsync(user,Input.Role);
-                    }
-                    else
-                    {
-                        await _userManager.AddToRoleAsync(user, ROLES.Role_User);
-                    }
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
