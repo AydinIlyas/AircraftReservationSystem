@@ -60,15 +60,13 @@
         </nav>
     </header>
     <div id="mainContainer">
-        <main role="main" class="pb-3">
             <partial name="_Notification" />
             @RenderBody()
-        </main>
     </div>
 
-    <footer class="footer text-muted bg-primary">
-        <div class="container">
-            &copy; 2023 - AircraftReservationSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="footer text-muted bg-primary position-relative">
+        <div class="container text-light">
+            &copy; 2023 - AircraftReservationSystem - <a class="text-secondary" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
