@@ -1,0 +1,84 @@
+﻿@model AircraftReservationSystem.Models.ViewModels.AddUserModel
+
+@{
+    ViewData["Title"] = "Add User";
+}
+
+<div class="container mt-2 mb-2">
+    <h2>@ViewData["Title"]</h2>
+    <div class="row card shadow">
+        <div class="justify-content-center align-items-center">
+            <form asp-action="CreateUser" method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label">Email</label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label">Password</label>
+                    <input asp-for="Password" type="password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>S
+
+                <div class="mb-3">
+                    <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
+                    <input asp-for="ConfirmPassword" type="password" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Firstname" class="form-label">First Name</label>
+                    <input asp-for="Firstname" class="form-control" />
+                    <span asp-validation-for="Firstname" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Lastname" class="form-label">Last Name</label>
+                    <input asp-for="Lastname" class="form-control" />
+                    <span asp-validation-for="Lastname" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3 d-flex align-items-center">
+                    <select asp-for="Role" asp-items="@(new SelectList(ViewBag.Roles, "Name", "Name"))" class="form-select">
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="PassportNumber" class="form-label">Passport Number</label>
+                    <input asp-for="PassportNumber" class="form-control" />
+                    <span asp-validation-for="PassportNumber" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+                    <input asp-for="PhoneNumber" class="form-control" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="BirthDate" class="form-label">Birth Date</label>
+                    <input asp-for="BirthDate" type="date" class="form-control" />
+                    <span asp-validation-for="BirthDate" class="text-danger"></span>
+                </div>
+
+
+                <div class="button-group mt-1">
+                    <div class="form-group">
+                        <a asp-action="Index" class="btn btn-secondary btn-block">Back to List</a>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary btn-block mt-1" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

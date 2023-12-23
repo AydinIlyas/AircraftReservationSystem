@@ -1,5 +1,6 @@
 ﻿using AircraftReservationSystem.Models;
 using AircraftReservationSystem.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AircraftReservationSystem.Areas.Admin.Services.Interfaces
 {
@@ -10,5 +11,6 @@ namespace AircraftReservationSystem.Areas.Admin.Services.Interfaces
         ApplicationUserViewModel? GetPassenger(string id);
         ApplicationUser? GetPassengerById(string id);
         Task<bool> UpdatePassengerAsync(ApplicationUserViewModel passengerVM);
+        Task<bool> AddUser(AddUserModel userModel);
     }
 }
