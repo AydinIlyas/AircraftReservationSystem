@@ -29,7 +29,7 @@ namespace AircraftReservationSystem.Areas.AirlineUser.Services
         public List<AircraftVM> GetAircraftVMs()
         {
             var aircrafts = _unitOfWork.Aircraft.GetAll();
-            var aircraftVMs= aircrafts.Select(aircraft => _mapper.Map<Aircraft, AircraftVM>(aircraft)).ToList();
+            var aircraftVMs = _mapper.Map<List<Aircraft>, List<AircraftVM>>(aircrafts.ToList());
 
             return aircraftVMs;
         }

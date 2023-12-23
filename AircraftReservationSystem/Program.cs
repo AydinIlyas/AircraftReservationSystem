@@ -40,6 +40,7 @@ builder.Services.AddScoped<IAirportService, AirportService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IFlightService, FlightService>();
 builder.Services.AddScoped<IAircraftService, AircraftService>();
+builder.Services.AddScoped<IAircraftTypeService, AircraftTypeService>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 

@@ -9,6 +9,9 @@ namespace AircraftReservationSystem.Mapper
         public MappingProfile()
         {
             CreateMap<Aircraft, AircraftVM>();
+            CreateMap<AircraftVM,Aircraft >();
+            CreateMap<AircraftType,AircraftTypeVM>();
+            CreateMap<AircraftTypeVM,AircraftType>();
 
         }
 
