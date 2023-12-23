@@ -3,10 +3,11 @@ using AircraftReservationSystem.DataAccess.Repository.IRepository;
 using AircraftReservationSystem.Models;
 using AircraftReservationSystem.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AircraftReservationSystem.Areas.Admin.Services
 {
-    public class UserService:IUserService
+    public class UserService : IUserService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -27,10 +28,10 @@ namespace AircraftReservationSystem.Areas.Admin.Services
 
         public List<ApplicationUserViewModel> GetAllPassengers()
         {
-            var passengers=_unitOfWork.Passenger.GetAll().ToList();
+            var passengers = _unitOfWork.Passenger.GetAll().ToList();
             var applicationUserVMs = passengers.Select(passenger => new ApplicationUserViewModel
             {
-                Id=passenger.Id,
+                Id = passenger.Id,
                 Firstname = passenger.Firstname,
                 Lastname = passenger.Lastname,
                 Email = passenger.Email,
@@ -59,8 +60,8 @@ namespace AircraftReservationSystem.Areas.Admin.Services
 
         public ApplicationUser? GetPassengerById(string id)
         {
-            ApplicationUser passenger= _unitOfWork.Passenger.GetFirstOrDefault(x => x.Id.Equals(id));
-            if(passenger==null)
+            ApplicationUser passenger = _unitOfWork.Passenger.GetFirstOrDefault(x => x.Id.Equals(id));
+            if (passenger == null)
             {
                 _logger.LogWarning("User not found! User Id: {Id}", id);
                 return null;
@@ -79,6 +80,45 @@ namespace AircraftReservationSystem.Areas.Admin.Services
 
             var result = await _userManager.UpdateAsync(passenger);
             return result.Succeeded;
+        }
+
+        async Task<bool> IUserService.AddUser(AddUserModel userModel)
+        {
+            var user = CreateUser();
+            user.Email = userModel.Email;
+            user.EmailConfirmed = false;
+            user.UserName = userModel.Email;
+            user.Firstname = userModel.Firstname;
+            user.Lastname = userModel.Lastname;
+            user.PhoneNumber = userModel.PhoneNumber;
+            user.PassportNumber = userModel.PassportNumber;
+            user.BirthDate = (DateTime)userModel.BirthDate;
+
+            var result = await _userManager.CreateAsync(user, userModel.Password);
+
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, userModel.Role);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private ApplicationUser CreateUser()
+        {
+            try
+            {
+                return Activator.CreateInstance<ApplicationUser>();
+            }
+            catch
+            {
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(ApplicationUser)}'. " +
+                    $"Ensure that '{nameof(ApplicationUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                    $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
+            }
         }
     }
 }
