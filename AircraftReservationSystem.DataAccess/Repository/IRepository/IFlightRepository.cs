@@ -9,5 +9,6 @@ namespace AircraftReservationSystem.DataAccess.Repository.IRepository
 {
     public interface IFlightRepository : IRepository<Flight>
     {
+        public IQueryable<Flight> GetAllWithAdditionalNames();
     }
 }

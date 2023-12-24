@@ -1,62 +1,42 @@
-﻿@model List<AircraftReservationSystem.Models.ViewModels.AircraftVM>
-@{
-    ViewData["Title"] = "Index";
-}
+﻿@model IEnumerable<AircraftReservationSystem.Models.Airline>
+
 
 <div class="container p-3">
-    <h1>Aircraft Management</h1>
+    <h1>Airline Management</h1>
     <div class="row pt-4">
         <div class="col-6">
-            <h2 class="text-dark">Aircraft List</h2>
+            <h2 class="text-dark">Airline List</h2>
         </div>
         <div class="col-6 text-end">
-            <a asp-controller="Aircraft" asp-action="AddAircraft" class="btn btn-primary">
-                <i class="bi bi-plus-circle"></i>&nbsp; Add New Aircraft
+            <a asp-controller="Airline" asp-action="AddAirline" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i>&nbsp; Add New Airline
             </a>
         </div>
     </div>
 
     <br /><br />
 
-    <table class="table table-bordered table-striped" width="100%">
+    <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th width="10%">
-                    Id
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
                 </th>
-                <th width="10%">
-                    Name
-                </th>
-                <th width="10%">
-                    Airline
-                </th>
-                <th width="10%">
-                    Aircraft Type
-                </th>
-                <th width="10%"></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var obj in Model)
+            @foreach (var item in Model)
             {
                 <tr>
                     <td>
-                        @obj.Id
-                    </td>
-                    <td>
-                        @obj.Name
-                    </td>
-                    <td>
-                        @obj?.AirlineName
-                    </td>
-                    <td>
-                        @obj?.AircraftType?.Type
+                        @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
                         <div class="btn-group" role="group">
-                            <a asp-controller="Aircraft" asp-action="Edit" asp-route-id="@obj.Id"
-                               class="btn btn-primary"> <i class="bi bi-pencil-square"></i> Edit</a>
-                            <a class="btn btn-danger" data-item-id="@obj.Id"> <i class="bi bi-trash-fill"></i> Delete</a>
+                            <a asp-controller="Airline" asp-action="EditAirline" asp-route-id="@item.Id"
+                           class="btn btn-primary"> <i class="bi bi-pencil-square"></i> Edit</a>
+                            <a class="btn btn-danger" data-item-id="@item.Id"> <i class="bi bi-trash-fill"></i> Delete</a>
                         </div>
                     </td>
                 </tr>
@@ -70,22 +50,20 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                Are you sure you want to delete the item with the name '@obj.Id'?
+                                Are you sure you want to delete the item with the name '@item.Name'?
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Give up</button>
-                                <a asp-controller="User" asp-action="DeleteConfirmed" asp-route-id="@obj.Id" class="btn btn-danger" id="confirmDelete">Confirm</a>
+                                <a asp-controller="Airline" asp-action="DeleteConfirmed" asp-route-id="@item.Id" class="btn btn-danger" id="confirmDelete">Confirm</a>
                             </div>
                         </div>
                     </div>
                 </div>
             }
-
         </tbody>
 
     </table>
 </div>
-
 @section scripts {
     <script src="~/js/DeleteModal.js"></script>
 }

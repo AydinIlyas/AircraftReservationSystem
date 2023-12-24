@@ -2,6 +2,8 @@
 using AircraftReservationSystem.DataAccess.Repository.IRepository;
 using AircraftReservationSystem.Models;
 using AircraftReservationSystem.Models.ViewModels;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AircraftReservationSystem.Areas.AirlineUser.Services
 {
@@ -9,41 +11,38 @@ namespace AircraftReservationSystem.Areas.AirlineUser.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<FlightService> _logger;
+        private readonly IMapper _mapper;
 
-        public FlightService(IUnitOfWork unitOfWork, ILogger<FlightService> logger)
+        public FlightService(IUnitOfWork unitOfWork, ILogger<FlightService> logger, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
+            _mapper = mapper;
         }
 
         public bool AddFlight(FlightInformation flightInformation)
         {
-            Flight flight = flightInformation.toFlight();
+            Flight flight =_mapper.Map<Flight>(flightInformation);
             _unitOfWork.Flight.Add(flight);
             _unitOfWork.Save();
             return true;
         }
 
+        public SelectList GetAircraftSelectList()
+        {
+            return new SelectList(_unitOfWork.Aircraft.GetAll(),"Id","Name");
+        }
+
+        public SelectList GetAirportSelectList()
+        {
+            return new SelectList(_unitOfWork.Airport.GetAll(), "Id", "Name");
+        }
+
         public List<FlightInformation> GetFlights()
         {
-            var flights=_unitOfWork.Flight.GetAll();
+            var flights=_unitOfWork.Flight.GetAllWithAdditionalNames();
 
-            return flights.Select(flight => new FlightInformation
-            {
-                Id = flight.Id,
-                FlightNumber = flight.FlightNumber,
-                DepartureAirport = flight.DepartureAirport,
-                ArrivalAirport = flight.ArrivalAirport,
-                Duration = flight.Duration,
-                Price = flight.Price,
-                BusinessPrice = flight.BusinessPrice,
-                Aircraft = flight.Aircraft,
-                AirCraftId = flight.AirCraftId,
-                DepartureAirportId = flight.DepartureAirportId,
-                DepartureDate = flight.DepartureDate,
-                ArrivalAirportId = flight.ArrivalAirportId,
-                ArrivalDate = flight.ArrivalDate,
-            }).ToList();
+            return _mapper.Map<List<FlightInformation>>(flights);
         }
     }
 }

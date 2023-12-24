@@ -41,6 +41,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IFlightService, FlightService>();
 builder.Services.AddScoped<IAircraftService, AircraftService>();
 builder.Services.AddScoped<IAircraftTypeService, AircraftTypeService>();
+builder.Services.AddScoped<IAirlineService, AirlineService>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 

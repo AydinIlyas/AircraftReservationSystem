@@ -3,6 +3,7 @@ using AircraftReservationSystem.DataAccess.Repository.IRepository;
 using AircraftReservationSystem.Models;
 using AircraftReservationSystem.Models.ViewModels;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AircraftReservationSystem.Areas.AirlineUser.Services
 {
@@ -26,12 +27,24 @@ namespace AircraftReservationSystem.Areas.AirlineUser.Services
             _unitOfWork.Save();
         }
 
+        public SelectList GetAircraftTypeSelectList()
+        {
+            var aircraftTypeVMs = _mapper.Map<IEnumerable<AircraftType>, IEnumerable<AircraftTypeVM>>(_unitOfWork.AircraftType.GetAll());
+            return new SelectList(aircraftTypeVMs, "Id", "Type");
+        }
+
         public List<AircraftVM> GetAircraftVMs()
         {
-            var aircrafts = _unitOfWork.Aircraft.GetAll();
+            var aircrafts = _unitOfWork.Aircraft.GetAllWithAirlineAndAircraftType().ToList();
             var aircraftVMs = _mapper.Map<List<Aircraft>, List<AircraftVM>>(aircrafts.ToList());
 
             return aircraftVMs;
+        }
+
+        public SelectList GetAirlineTypeSelectList()
+        {
+            var airlines = _unitOfWork.Airline.GetAll();
+            return new SelectList(airlines, "Id", "Name");
         }
     }
 }

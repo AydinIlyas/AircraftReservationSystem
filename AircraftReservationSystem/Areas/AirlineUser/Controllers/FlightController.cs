@@ -19,11 +19,12 @@ namespace AircraftReservationSystem.Areas.AirlineUser.Controllers
             var flights=_flightService.GetFlights();
             return View(flights);
         }
-
+        [HttpGet]
         public IActionResult AddFlight()
         {
-            FlightInformation flightInformation=new FlightInformation();
-            return View(flightInformation);
+            ViewBag.Airports = _flightService.GetAirportSelectList();
+            ViewBag.Aircrafts = _flightService.GetAircraftSelectList();
+            return View();
         }
 
         [HttpPost]

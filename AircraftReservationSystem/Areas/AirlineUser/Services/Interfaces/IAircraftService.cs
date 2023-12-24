@@ -1,5 +1,6 @@
 ﻿using AircraftReservationSystem.Models;
 using AircraftReservationSystem.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AircraftReservationSystem.Areas.AirlineUser.Services.Interfaces
 {
@@ -7,5 +8,7 @@ namespace AircraftReservationSystem.Areas.AirlineUser.Services.Interfaces
     {
         void AddAircraft(AircraftVM aircraftVM);
         List<AircraftVM> GetAircraftVMs();
+        SelectList GetAircraftTypeSelectList();
+        SelectList GetAirlineTypeSelectList();
     }
 }

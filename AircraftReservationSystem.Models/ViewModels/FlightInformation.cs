@@ -10,7 +10,7 @@ namespace AircraftReservationSystem.Models.ViewModels
         {
         }
 
-        public FlightInformation(int id,string flightNumber, DateTime departureDate, DateTime arrivalDate, int duration, float price, float businessPrice, Aircraft aircraft, int airCraftId, Airport departureAirport, int departureAirportId, Airport arrivalAirport, int arrivalAirportId)
+        public FlightInformation(int id, string flightNumber, DateTime departureDate, DateTime arrivalDate, int duration, float price, float businessPrice, int aircraftId, string aircraftName, int departureAirportId, string departureAirportName, int arrivalAirportId, string arrivalAirportName)
         {
             Id = id;
             FlightNumber = flightNumber;
@@ -19,13 +19,14 @@ namespace AircraftReservationSystem.Models.ViewModels
             Duration = duration;
             Price = price;
             BusinessPrice = businessPrice;
-            Aircraft = aircraft;
-            AirCraftId = airCraftId;
-            DepartureAirport = departureAirport;
+            AircraftId = aircraftId;
+            AircraftName = aircraftName;
             DepartureAirportId = departureAirportId;
-            ArrivalAirport = arrivalAirport;
+            DepartureAirportName = departureAirportName;
             ArrivalAirportId = arrivalAirportId;
+            ArrivalAirportName = arrivalAirportName;
         }
+
         public int Id { get; set; }
         public string FlightNumber { get; set; }
 
@@ -38,32 +39,12 @@ namespace AircraftReservationSystem.Models.ViewModels
         public float Price { get; set; }
 
         public float BusinessPrice { get; set; }
-
-        public Aircraft Aircraft { get; set; }
-        public int AirCraftId { get; set; }
-        public Airport DepartureAirport { get; set; }
+        public int AircraftId { get; set; }
+        public string AircraftName { get; set; }
         public int DepartureAirportId { get; set; }
-        public Airport ArrivalAirport { get; set; }
+        public string DepartureAirportName { get; set; }
         public int ArrivalAirportId { get; set; }
+        public string ArrivalAirportName { get; set; }
 
-        public Flight toFlight()
-        {
-            return new Flight
-            {
-                Id = this.Id,
-                FlightNumber = this.FlightNumber,
-                DepartureAirport = this.DepartureAirport,
-                ArrivalAirport = this.ArrivalAirport,
-                Duration = this.Duration,
-                Price = this.Price,
-                BusinessPrice = this.BusinessPrice,
-                Aircraft = this.Aircraft,
-                AirCraftId = this.AirCraftId,
-                DepartureAirportId = this.DepartureAirportId,
-                DepartureDate = this.DepartureDate,
-                ArrivalAirportId = this.ArrivalAirportId,
-                ArrivalDate = this.ArrivalDate,
-            };
-        }
     }
 }

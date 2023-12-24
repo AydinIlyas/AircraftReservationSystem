@@ -14,7 +14,7 @@ namespace AircraftReservationSystem.Models
         {
         }
 
-        public Flight(int id, string flightNumber, DateTime departureDate, DateTime arrivalDate, int duration, float price, float businessPrice, bool isDisabledFlight, Aircraft aircraft, int airCraftId, Airport departureAirport, int departureAirportId, Airport arrivalAirport, int arrivalAirportId, ICollection<FlightTicket> flightTickets)
+        public Flight(int id, string flightNumber, DateTime departureDate, DateTime arrivalDate, int duration, float price, float businessPrice, bool isDisabledFlight, Aircraft aircraft, int aircraftId, Airport departureAirport, int departureAirportId, Airport arrivalAirport, int arrivalAirportId, ICollection<FlightTicket> flightTickets)
         {
             Id = id;
             FlightNumber = flightNumber;
@@ -25,7 +25,7 @@ namespace AircraftReservationSystem.Models
             BusinessPrice = businessPrice;
             IsDisabledFlight = isDisabledFlight;
             Aircraft = aircraft;
-            AirCraftId = airCraftId;
+            AircraftId = aircraftId;
             DepartureAirport = departureAirport;
             DepartureAirportId = departureAirportId;
             ArrivalAirport = arrivalAirport;
@@ -56,8 +56,9 @@ namespace AircraftReservationSystem.Models
         [Required]
         public bool IsDisabledFlight { get; set; }
 
+        [ForeignKey("AircraftId")]
         public Aircraft Aircraft { get; set; }
-        public int AirCraftId { get; set; }
+        public int AircraftId { get; set; }
         [ForeignKey("DepartureAirportId")]
         public Airport DepartureAirport { get; set; }
         public int DepartureAirportId { get; set; }

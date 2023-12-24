@@ -3,6 +3,7 @@ using AircraftReservationSystem.Areas.AirlineUser.Services.Interfaces;
 using AircraftReservationSystem.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AircraftReservationSystem.Areas.AirlineUser.Controllers
 {
@@ -24,7 +25,9 @@ namespace AircraftReservationSystem.Areas.AirlineUser.Controllers
 
         public IActionResult AddAircraft()
         {
-            AircraftVM aircraftVM= new AircraftVM();
+            ViewBag.AircraftTypes=_aircraftService.GetAircraftTypeSelectList();
+            ViewBag.Airlines = _aircraftService.GetAirlineTypeSelectList();
+            AircraftVM aircraftVM = new AircraftVM();
             return View(aircraftVM);
         }
 

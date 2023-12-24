@@ -22,15 +22,15 @@
                     </div>
 
                     <div class="form-group mt-1">
-                        <label asp-for="DepartureAirport">Departure Airport:</label>
-                        <input asp-for="DepartureAirport" class="form-control mt-1" />
-                        <span asp-validation-for="DepartureAirport" class="text-danger"></span>
+                        <label asp-for="DepartureAirportId">Departure Airport:</label>
+                        <select asp-for="DepartureAirportId" asp-items="@ViewBag.Airports" class="form-control mt-1" ></select>
+                        <span asp-validation-for="DepartureAirportId" class="text-danger"></span>
                     </div>
 
                     <div class="form-group mt-1">
-                        <label asp-for="ArrivalAirport">Arrival Airport:</label>
-                        <input asp-for="ArrivalAirport" class="form-control mt-1" />
-                        <span asp-validation-for="ArrivalAirport" class="text-danger"></span>
+                        <label asp-for="ArrivalAirportId">Arrival Airport:</label>
+                        <select asp-for="ArrivalAirportId" asp-items="@ViewBag.Airports" class="form-control mt-1"></select>
+                        <span asp-validation-for="ArrivalAirportId" class="text-danger"></span>
                     </div>
 
                     <div class="form-group mt-1">
@@ -55,9 +55,9 @@
                         <span asp-validation-for="BusinessPrice" class="text-danger"></span>
                     </div>
                     <div class="form-group mt-1">
-                        <label asp-for="Aircraft">Aircraft:</label>
-                        <input asp-for="Aircraft" class="form-control mt-1" />
-                        <span asp-validation-for="Aircraft" class="text-danger"></span>
+                        <label asp-for="AircraftId">Aircraft:</label>
+                        <select asp-for="AircraftId" asp-items="@ViewBag.Aircrafts" class="form-control mt-1"> </select>
+                        <span asp-validation-for="AircraftId" class="text-danger"></span>
                     </div>
 
                     <div class="button-group mt-1">
