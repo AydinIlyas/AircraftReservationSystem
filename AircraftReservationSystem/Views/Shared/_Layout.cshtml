@@ -45,21 +45,13 @@
                             <li class="nav-item nav-item-hover">
                                 <a class="nav-link text-light" asp-area="AirlineUser" asp-controller="Flight" asp-action="Index">Flight Management</a>
                             </li>
-                            <li class="nav-item nav-item-hover">
-                                <a class="nav-link text-light" asp-area="AirlineUser" asp-controller="Aircraft" asp-action="Index">Aircraft Management</a>
-                            </li>
-                            <li class="nav-item nav-item-hover">
-                                <a class="nav-link text-light" asp-area="AirlineUser" asp-controller="AircraftType" asp-action="Index">Aircraft Type Management</a>
-                            </li>
                         }
                         <li class="nav-item dropdown nav-item-hover ">
-                            <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                            <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Aircraft</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item text-light" href="#">Action</a>
-                                <a class="dropdown-item text-light" href="#">Another action</a>
-                                <a class="dropdown-item text-light" href="#">Something else here</a>
-                                <div class="dropdown-divider text-light"></div>
-                                <a class="dropdown-item text-light" href="#">Separated link</a>
+                                <a class="nav-link text-light" asp-area="AirlineUser" asp-controller="Aircraft" asp-action="Index">Aircraft Management</a>
+                                <a class="nav-link text-light" asp-area="AirlineUser" asp-controller="AircraftType" asp-action="Index">Aircraft Type Management</a>
+
                             </div>
                         </li>
                     </ul>

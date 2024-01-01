@@ -12,7 +12,7 @@ namespace AircraftReservationSystem.Models.ViewModels
         {
         }
 
-        public AircraftTypeVM(int id, string type, int seatLength, int seatWidth, int capacity, int businessRows)
+        public AircraftTypeVM(int id, string type, int seatLength, int seatWidth, int capacity, string businessRows)
         {
             Id = id;
             Type = type;
@@ -26,6 +26,6 @@ namespace AircraftReservationSystem.Models.ViewModels
         public int SeatLength { get; set; }
         public int SeatWidth { get; set; }
         public int Capacity { get; set; }
-        public int BusinessRows { get; set; }
+        public String BusinessRows { get; set; }
     }
 }

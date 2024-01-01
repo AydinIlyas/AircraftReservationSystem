@@ -1,0 +1,55 @@
+﻿.plane {
+    border: 7px solid #8fb4f4;
+    min-height: 37vh;
+    border-top-right-radius: 46%;
+    border-top-left-radius: 18%;
+    border-bottom-right-radius: 46%;
+    border-bottom-left-radius: 18%;
+    min-width: 85%;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    padding-top: 7vh;
+    padding-right: 10vw;
+    padding-bottom: 6vh;
+}
+
+ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.seats {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    margin-bottom: 1vh
+}
+
+.seat {
+    display: flex;
+    padding: 2px;
+    position: relative;
+}
+
+    .seatLabel {
+        display: block;
+        position: relative;
+        width: auto;
+        text-align: center;
+        font-size: 13px;
+        background-color: darkgray;
+        border-radius: 10%;
+        color: black;
+        padding: 1px
+    }
+
+.checkBoxContainer {
+    min-width: 85%;
+    padding-right: 10vw;
+}
+
+.activeSeat {
+    background-color: red;
+}
