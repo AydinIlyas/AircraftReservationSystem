@@ -1,43 +1,43 @@
 ﻿@model List<AircraftReservationSystem.Models.ViewModels.FlightInformation>
 @{
     ViewData["Title"] = "Index";
+    var date = Model[0].DepartureDate.Date;
+    var dateStr = date.Day + "/" + date.Month + "/" + date.Year;
 }
+
+<head>
+    <link rel="stylesheet" href="~/css/Flights.css" />
+</head>
 
 <div class="container p-3">
     <h1>Flight Management</h1>
     <div class="row pt-4">
-        <div class="col-6">
+        <div class="col-9">
             <h2 class="text-dark">Flight List</h2>
+        </div>
+        <div class="col-3">
+            <h2 class="text-dark">@dateStr</h2>
         </div>
     </div>
 
-    <br /><br />
+<hr />
 
-    <table class="table table-bordered table-striped" width="100%">
-        <thead>
-            <tr>
-                <th width="10%">Flight Number</th>
-                <th width="10%">Departure Airport</th>
-                <th width="10%">Arrival Airport</th>
-                <th width="10%">Departure Date</th>
-                <th width="10%">Arrival Date</th>
-                <th width="10%">Duration</th>
-                <th width="10%">Aircraft</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var obj in Model)
+    <div class="main-center">
+       @foreach (var obj in Model)
             {
-                <tr>
-                    <td>@obj.FlightNumber</td>
-                    <td>@obj.DepartureAirportName</td>
-                    <td>@obj.ArrivalAirportName</td>
-                    <td>@obj.DepartureDate.ToString("yyyy-MM-dd HH:mm")</td>
-                    <td>@obj.ArrivalDate.ToString("yyyy-MM-dd HH:mm")</td>
-                    <td>@obj.Duration</td>
-                    <td>@obj.AircraftName</td>
-                </tr>
+                <div class="card mt-3">
+                        
+                    <div class="card-header center">
+                        <h4 >@obj.DepartureAirportName -> @obj.ArrivalAirportName</h4>
+                        <div class="button-group">
+                        <p style="font-size:27px">@obj.DepartureDate.TimeOfDay - </p>
+                        <p style="font-size:27px"> @obj.ArrivalDate.TimeOfDay</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <input asp-action="goTicket" class="btn btn-primary p-2" type="button" value="Buy"/>
+                    </div>
+                </div>
             }
-        </tbody>
-    </table>
+    </div>
 </div>
