@@ -13,6 +13,8 @@ using AircraftReservationSystem.Areas.AirlineUser.Services.Interfaces;
 using AircraftReservationSystem.Areas.AirlineUser.Services;
 using Microsoft.Extensions.DependencyInjection;
 using AircraftReservationSystem.Mapper;
+using AircraftReservationSystem.Areas.User.Services.Interfaces;
+using AircraftReservationSystem.Areas.User.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +44,7 @@ builder.Services.AddScoped<IFlightService, FlightService>();
 builder.Services.AddScoped<IAircraftService, AircraftService>();
 builder.Services.AddScoped<IAircraftTypeService, AircraftTypeService>();
 builder.Services.AddScoped<IAirlineService, AirlineService>();
+builder.Services.AddScoped<IHomeService, HomeService>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 

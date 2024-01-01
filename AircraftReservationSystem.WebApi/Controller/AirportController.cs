@@ -25,7 +25,14 @@ namespace AircraftReservationSystem.WebApi.Controllers
 			var filteredAirports=airports.Where(a => a.Name.ToLower().Contains(inputValue.ToLower()));
 			return filteredAirports;
 		}
+        [HttpGet("getAirports")]
+        public async Task<IEnumerable<Airport>> GetAllAirports()
+        {
 
-		
-	}
+            IEnumerable<Airport> airports = await _unitOfWork.Airport.GetAllAsync();
+            return airports;
+        }
+
+
+    }
 }

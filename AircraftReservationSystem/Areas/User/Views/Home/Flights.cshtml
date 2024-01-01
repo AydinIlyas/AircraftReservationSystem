@@ -1,0 +1,43 @@
+﻿@model List<AircraftReservationSystem.Models.ViewModels.FlightInformation>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <h1>Flight Management</h1>
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-dark">Flight List</h2>
+        </div>
+    </div>
+
+    <br /><br />
+
+    <table class="table table-bordered table-striped" width="100%">
+        <thead>
+            <tr>
+                <th width="10%">Flight Number</th>
+                <th width="10%">Departure Airport</th>
+                <th width="10%">Arrival Airport</th>
+                <th width="10%">Departure Date</th>
+                <th width="10%">Arrival Date</th>
+                <th width="10%">Duration</th>
+                <th width="10%">Aircraft</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td>@obj.FlightNumber</td>
+                    <td>@obj.DepartureAirportName</td>
+                    <td>@obj.ArrivalAirportName</td>
+                    <td>@obj.DepartureDate.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>@obj.ArrivalDate.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>@obj.Duration</td>
+                    <td>@obj.AircraftName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

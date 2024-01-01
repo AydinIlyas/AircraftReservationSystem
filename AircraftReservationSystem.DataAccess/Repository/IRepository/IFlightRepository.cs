@@ -1,4 +1,5 @@
 ﻿using AircraftReservationSystem.Models;
+using AircraftReservationSystem.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace AircraftReservationSystem.DataAccess.Repository.IRepository
 {
     public interface IFlightRepository : IRepository<Flight>
     {
-        public IQueryable<Flight> GetAllWithAdditionalNames();
+        IQueryable<Flight> GetAllWithAdditionalNames();
+        IQueryable<Flight> SearchFlight(SearchFlight searchFlight);
     }
 }

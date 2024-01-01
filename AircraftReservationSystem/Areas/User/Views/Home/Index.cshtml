@@ -11,7 +11,7 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">Flight Search</h5>
 
-                        <form>
+                        <form asp-action="Index" method="post">
                             <div class="row">
                                 <div>
                                     <input type="radio" asp-for="IsOneWay" value="true" onchange="IsOneWayOrNot()" checked> <span>One way</span>
@@ -33,19 +33,23 @@
                                         </datalist>
                                     </div>
                                 </div>
+                                <input asp-for="ArrivalAirportId" type="text" class="form-control" id="arrivalAirportId" hidden>
+                                <input asp-for="DepartureAirportId" type="text" class="form-control" id="departureAirportId" hidden>
+
+
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label asp-for="OutboundFlightDate" class="form-label">Start Date</label>
-                                        <input type="date" class="form-control" id="startDate">
+                                        <input asp-for="OutboundFlightDate" type="date" class="form-control" id="startDate">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3" id="endDateContainer" style="display:none;">
                                         <label asp-for="ReturnFlightDate" class="form-label">End Date</label>
-                                        <input type="date" class="form-control" id="endDate">
+                                        <input asp-for="ReturnFlightDate" type="date" class="form-control" id="endDate">
                                     </div>
                                 </div>
                             </div>
