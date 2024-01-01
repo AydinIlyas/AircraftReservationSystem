@@ -14,7 +14,7 @@ namespace AircraftReservationSystem.Models
         {
         }
 
-        public AircraftType(int id, string type, int seatLength, int seatWidth, int capacity, int businessRows, ICollection<Aircraft> aircrafts)
+        public AircraftType(int id, string type, int seatLength, int seatWidth, int capacity, string businessRows, ICollection<Aircraft> aircrafts)
         {
             Id = id;
             Type = type;
@@ -30,7 +30,7 @@ namespace AircraftReservationSystem.Models
         public int SeatLength { get; set; }
         public int SeatWidth { get; set; }
         public int Capacity { get; set; }
-        public int BusinessRows { get; set; }
+        public string BusinessRows { get; set; }
 
         public ICollection<Aircraft> Aircrafts { get; set; }
     }

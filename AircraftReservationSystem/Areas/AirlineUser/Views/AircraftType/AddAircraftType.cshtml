@@ -1,59 +1,187 @@
 ﻿@model AircraftReservationSystem.Models.ViewModels.AircraftTypeVM
+@{
+    string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-
-
+    int width = 6;
+    int height = 25;
+}
+<head>
+    <link rel="stylesheet" href="~/css/AddAircraftType.css" />
+</head>
 
 <div class="row " style="margin-right: 0; margin-left: 0;">
-    <div class="col-md-6 mx-auto">
+    <div class="col-md-10 mx-auto">
         <div class="mt-3">
             <h4>Add AircraftType</h4>
-
         </div>
         <div class="card">
-            <div class="card-body shadow-lg">
+            <div class="card-body shadow-lg w-80">
 
-                <form asp-action="AddAircraftType" method="post">
+                <form id="multiStepForm" asp-action="AddAircraftType" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                    <div class="form-group mt-1">
-                        <label asp-for="Type">Type:</label>
-                        <input asp-for="Type" class="form-control mt-1" />
-                        <span asp-validation-for="Type" class="text-danger"></span>
+                    <div id="step1">
+                        <div class="form-group mt-1">
+                            <label asp-for="Type">Type:</label>
+                            <input asp-for="Type" class="form-control mt-1" />
+                            <span asp-validation-for="Type" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mt-1">
+                            <label asp-for="SeatLength">Seat Length:</label>
+                            <input id="width" asp-for="SeatLength" class="form-control mt-1" />
+                            <span asp-validation-for="SeatLength" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mt-1">
+                            <label asp-for="SeatWidth">Seat Width:</label>
+                            <input id="height" asp-for="SeatWidth" class="form-control mt-1" />
+                            <span asp-validation-for="SeatWidth" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mt-1">
+                            <label asp-for="Capacity">Capacity:</label>
+                            <input asp-for="Capacity" class="form-control mt-1" />
+                            <span asp-validation-for="Capacity" class="text-danger"></span>
+                        </div>
                     </div>
 
-                    <div class="form-group mt-1">
-                        <label asp-for="SeatLength">Seat Length:</label>
-                        <input asp-for="SeatLength" class="form-control mt-1" />
-                        <span asp-validation-for="SeatLength" class="text-danger"></span>
-                    </div>
-                    <div class="form-group mt-1">
-                        <label asp-for="SeatWidth">Seat Width:</label>
-                        <input asp-for="SeatWidth" class="form-control mt-1" />
-                        <span asp-validation-for="SeatWidth" class="text-danger"></span>
-                    </div>
-                    <div class="form-group mt-1">
-                        <label asp-for="BusinessRows">Business Rows:</label>
-                        <input asp-for="BusinessRows" class="form-control mt-1" />
-                        <span asp-validation-for="BusinessRows" class="text-danger"></span>
-                    </div>
-                    <div class="form-group mt-1">
-                        <label asp-for="Capacity">Capacity:</label>
-                        <input asp-for="Capacity" class="form-control mt-1" />
-                        <span asp-validation-for="Capacity" class="text-danger"></span>
-                    </div>
-                    <div class="button-group mt-1">
-                        <div class="form-group">
-                            <a asp-action="Index" class="btn btn-secondary btn-block">Back to List</a>
+                    <div id="step2" style="display: none;">
+                        <div class="form-group mt-1">
+                            <label for="businessRows">Select Business Columns:</label>
+                            <!-- Checkboxs -->
+                            <div class="checkBoxContainer">
+                                @for (int i = 0; i < 25; i++)
+                                {
+                                    <input id="@i" onclick="selectColumn(@i)" type="checkbox" />
+                                }
+                                <input type="hidden" asp-for="BusinessRows" id="businessRowsHidden" />
+                            </div>
+                            <!-- Plane -->
+                            <div class="plane">
+                                <ol>
+                                    <li>
+                                        @for (int j = 0; j < width; j++)
+                                        {
+                                            if (j == @width / 2)
+                                            {
+                                                <br />
+                                            }
+                                            <ol class="seats">
+                                                @for (int i = 0; i < height; i++)
+                                                {
+                                                    var seatId = $"{i}{@alphabet[j]}";
+                                                    <li class="seat">
+                                                        <label class="seatLabel" id="@seatId">@($"{i + 1}{@alphabet[j]}")</label>
+                                                    </li>
+                                                }
+                                            </ol>
+                                        }
+                                    </li>
+                                </ol>
+                            </div>
                         </div>
+                    </div>
+
+                    <div class="button-group mt-1">
+                        <a asp-action="Index" id="backToList" class="btn btn-secondary btn-block">Back to List</a>
                         <div class="form-group">
+                            <button type="button" class="btn btn-secondary btn-block" id="back" onclick="prevStep()">Back</button>
+                        </div>
+                        <div class="form-group" id="nextButton">
+                            <button type="button" class="btn btn-primary btn-block mt-1" onclick="nextStep()">Next</button>
+                        </div>
+                        <div class="form-group" id="submitButton" style="display: none;">
                             <input type="submit" value="Create" class="btn btn-primary btn-block mt-1" />
                         </div>
                     </div>
                 </form>
+                <label id="deneme"></label>
             </div>
         </div>
     </div>
 </div>
 
 @section Scripts {
+    <script>
+
+        let columns = [];
+        document.getElementById('back').style.display = 'none';
+
+        function nextStep() {
+            let height = document.getElementById("height").value;
+            let width = document.getElementById("width").value;
+            debugger;
+            var jsonData = {
+                width: width,
+                height: height
+            };
+
+            document.getElementById('step1').style.display = 'none';
+            document.getElementById('step2').style.display = 'block';
+            document.getElementById('nextButton').style.display = 'none';
+            document.getElementById('submitButton').style.display = 'block';
+            document.getElementById('backToList').style.display = 'none';
+            document.getElementById('back').style.display = 'block';
+            //$.post("https://localhost:44364/AirlineUser/AircraftType/ForNext"), { width: width, height: height }, function (data) {
+                
+            //}
+            fetch('https://localhost:44364/AirlineUser/AircraftType/ForNext', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(jsonData)
+            })
+                .then(response => {
+
+                    if (response.ok) {
+                    }
+                    else{
+                        console.error('Error:', response);
+                    }
+                })
+                .catch(error => {
+                    console.error('Fetch Error:', error);
+                });
+        }
+
+
+        function prevStep() {
+            document.getElementById('step1').style.display = 'block';
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('nextButton').style.display = 'block';
+            document.getElementById('submitButton').style.display = 'none';
+            document.getElementById('backToList').style.display = 'block';
+            document.getElementById('back').style.display = 'none';
+        }
+
+        function selectColumn(columnId) {
+            var checkbox = document.getElementById(columnId);
+            const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            var businessRows = document.getElementById("businessRowsHidden");
+            if (checkbox.checked) {
+                for (let i = 0; i < @width; i++) {
+                    const id = (columnId + alphabet[i]).toString();
+                    var element = document.getElementById(id);
+                    if (element) {
+                        element.style.backgroundColor = "#8fb4f4";
+                    }
+                }
+                columns.push(columnId);
+                businessRows.value = columns;
+            } else {
+                for (let i = 0; i < @width; i++) {
+                    const id = (columnId + alphabet[i]).toString();
+                    var element = document.getElementById(id);
+                    if (element) {
+                        element.style.backgroundColor = "#A9A9A9";
+                    }
+                }
+                columns = columns.filter(element => element != columnId);
+                businessRows.value = columns;
+            }
+        }
+
+    </script>
 }

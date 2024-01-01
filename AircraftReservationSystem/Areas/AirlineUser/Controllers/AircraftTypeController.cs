@@ -90,5 +90,14 @@ namespace AircraftReservationSystem.Areas.AirlineUser.Controllers
             return RedirectToAction("Index");
 
         }
+
+        [HttpPost]
+        public void ForNext(int width, int height)
+        {
+            TempData["Length"] = 25;
+            TempData["Width"] = 6;
+
+        }
+
     }
 }
