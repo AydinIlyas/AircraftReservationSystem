@@ -1,10 +1,13 @@
 ﻿using AircraftReservationSystem.Areas.Admin.Services.Interfaces;
 using AircraftReservationSystem.Models;
+using AircraftReservationSystem.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AircraftReservationSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = ROLES.Role_Admin)]
     public class AirlineController : Controller
     {
         private readonly IAirlineService _airlineService;

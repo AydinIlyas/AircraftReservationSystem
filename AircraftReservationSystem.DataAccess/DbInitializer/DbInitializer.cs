@@ -1,6 +1,7 @@
 ﻿using AircraftReservationSystem.DataAccess.Data;
 using AircraftReservationSystem.Models;
 using AircraftReservationSystem.Utility;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -78,6 +79,26 @@ namespace AircraftReservationSystem.DataAccess.DbInitializer
                 }, "Admin123*").GetAwaiter().GetResult();
                 _userManager.CreateAsync(new ApplicationUser
                 {
+                    UserName = "b211210101@sakarya.edu.tr",
+                    Email = "b211210101@sakarya.edu.tr",
+                    Firstname = "İlyas",
+                    Lastname = "Aydın",
+                    PassportNumber = "12345678910",
+                    BirthDate = DateTime.ParseExact("31.03.2003", "dd.MM.yyyy", null),
+                    SoldTickets = null
+                }, "Ilyas123*").GetAwaiter().GetResult();
+                _userManager.CreateAsync(new ApplicationUser
+                {
+                    UserName = "b211210047@sakarya.edu.tr",
+                    Email = "b211210047@sakarya.edu.tr",
+                    Firstname = "Emirhan",
+                    Lastname = "Etli",
+                    PassportNumber = "12345678910",
+                    BirthDate = DateTime.ParseExact("15.06.2003", "dd.MM.yyyy", null),
+                    SoldTickets = null
+                }, "Emirhan123*").GetAwaiter().GetResult();
+                _userManager.CreateAsync(new ApplicationUser
+                {
                     UserName = "user@gmail.com",
                     Email = "user@gmail.com",
                     Firstname = "user",
@@ -98,10 +119,14 @@ namespace AircraftReservationSystem.DataAccess.DbInitializer
                 }, "AirlineUser123*").GetAwaiter().GetResult();
 
                 ApplicationUser admin = _db.Passengers.FirstOrDefault(u => u.Email == "admin@gmail.com");
+                ApplicationUser ilyas = _db.Passengers.FirstOrDefault(u => u.Email == "b211210101@sakarya.edu.tr");
+                ApplicationUser emirhan = _db.Passengers.FirstOrDefault(u => u.Email == "b211210047@sakarya.edu.tr");
                 ApplicationUser user = _db.Passengers.FirstOrDefault(u => u.Email == "user@gmail.com");
                 ApplicationUser airlineUser = _db.Passengers.FirstOrDefault(u => u.Email == "airlineuser@gmail.com");
 
                 _userManager.AddToRoleAsync(admin, ROLES.Role_Admin).GetAwaiter().GetResult();
+                _userManager.AddToRoleAsync(ilyas, ROLES.Role_Admin).GetAwaiter().GetResult();
+                _userManager.AddToRoleAsync(emirhan, ROLES.Role_Admin).GetAwaiter().GetResult();
                 _userManager.AddToRoleAsync(user, ROLES.Role_User).GetAwaiter().GetResult();
                 _userManager.AddToRoleAsync(airlineUser, ROLES.Role_Airline_User).GetAwaiter().GetResult();
             }

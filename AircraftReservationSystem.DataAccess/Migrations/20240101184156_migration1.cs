@@ -19,7 +19,7 @@ namespace AircraftReservationSystem.DataAccess.Migrations
                     SeatLength = table.Column<int>(type: "int", nullable: false),
                     SeatWidth = table.Column<int>(type: "int", nullable: false),
                     Capacity = table.Column<int>(type: "int", nullable: false),
-                    BusinessRows = table.Column<int>(type: "int", nullable: false)
+                    BusinessRows = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -62,6 +62,7 @@ namespace AircraftReservationSystem.DataAccess.Migrations
                     Lastname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PassportNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AirlineName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -115,6 +116,7 @@ namespace AircraftReservationSystem.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AirlineId = table.Column<int>(type: "int", nullable: false),
                     AircraftTypeId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -398,7 +400,7 @@ namespace AircraftReservationSystem.DataAccess.Migrations
                     Price = table.Column<float>(type: "real", nullable: false),
                     BusinessPrice = table.Column<float>(type: "real", nullable: false),
                     IsDisabledFlight = table.Column<bool>(type: "bit", nullable: false),
-                    AirCraftId = table.Column<int>(type: "int", nullable: false),
+                    AircraftId = table.Column<int>(type: "int", nullable: false),
                     DepartureAirportId = table.Column<int>(type: "int", nullable: false),
                     ArrivalAirportId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -406,8 +408,8 @@ namespace AircraftReservationSystem.DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_Flights", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Flights_Aircrafts_AirCraftId",
-                        column: x => x.AirCraftId,
+                        name: "FK_Flights_Aircrafts_AircraftId",
+                        column: x => x.AircraftId,
                         principalTable: "Aircrafts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -523,9 +525,9 @@ namespace AircraftReservationSystem.DataAccess.Migrations
                 column: "AirlineId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Flights_AirCraftId",
+                name: "IX_Flights_AircraftId",
                 table: "Flights",
-                column: "AirCraftId");
+                column: "AircraftId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Flights_ArrivalAirportId",
